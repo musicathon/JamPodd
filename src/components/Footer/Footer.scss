@@ -1,0 +1,119 @@
+@use '../../common';
+
+.footer {
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+
+	background: common.$bg-darker;
+	padding: 1em 3em;
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: center;
+}
+
+.song {
+	display: flex;
+	justify-content: flex-start;
+	gap: 1em;
+
+	&__img-cntr {
+		border-radius: 5px;
+		overflow: hidden;
+		width: 3em;
+		height: 3em;
+	}
+
+	&__info {
+		display: flex;
+		flex-flow: column;
+		justify-content: space-between;
+	}
+
+	&__name {
+		font-weight: 600;
+		font-size: 1.25em;
+	}
+
+	&__artist {
+		font-weight: 500;
+		font-size: 0.9375em;
+	}
+}
+
+.player {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	gap: 0.75em;
+
+	&__btns {
+		display: flex;
+		align-items: center;
+		gap: 0.3em;
+	}
+
+	&__btn {
+		&.--primary {
+			width: 3.25em;
+			fill: common.$primary;
+		}
+
+		&.--secondary {
+			width: 3em;
+			fill: common.$text-light;
+		}
+
+		&.--tertiary {
+			width: 1.75em;
+			fill: common.$text-light;
+		}
+	}
+
+	&__seek {
+		min-width: 250px;
+		width: 175%;
+		max-width: 500px;
+	}
+}
+
+.volume {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 1.25em;
+
+	&__btn {
+		width: 1.75em;
+		fill: common.$text-light;
+	}
+
+	&__seek {
+		min-width: 125px;
+		width: 10%;
+		max-width: 150px;
+	}
+}
+
+@mixin thumb-styles {
+	background: common.$text-light;
+	height: 13px;
+	width: 13px;
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+.seek {
+	height: 6px;
+	border-radius: 5px;
+	background: common.$faded;
+	cursor: pointer;
+
+	&::-webkit-slider-thumb {
+		@include thumb-styles();
+	}
+
+	&::-moz-range-thumb {
+		@include thumb-styles();
+	}
+}

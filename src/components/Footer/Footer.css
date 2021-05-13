@@ -1,0 +1,101 @@
+.footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background: #0f1626;
+  padding: 1em 3em;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.song {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1em;
+}
+.song__img-cntr {
+  border-radius: 5px;
+  overflow: hidden;
+  width: 3em;
+  height: 3em;
+}
+.song__info {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+.song__name {
+  font-weight: 600;
+  font-size: 1.25em;
+}
+.song__artist {
+  font-weight: 500;
+  font-size: 0.9375em;
+}
+
+.player {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 0.75em;
+}
+.player__btns {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+.player__btn.--primary {
+  width: 3.25em;
+  fill: #ef3355;
+}
+.player__btn.--secondary {
+  width: 3em;
+  fill: #d3d3d3;
+}
+.player__btn.--tertiary {
+  width: 1.75em;
+  fill: #d3d3d3;
+}
+.player__seek {
+  min-width: 250px;
+  width: 175%;
+  max-width: 500px;
+}
+
+.volume {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.25em;
+}
+.volume__btn {
+  width: 1.75em;
+  fill: #d3d3d3;
+}
+.volume__seek {
+  min-width: 125px;
+  width: 10%;
+  max-width: 150px;
+}
+
+.seek {
+  height: 6px;
+  border-radius: 5px;
+  background: rgba(218, 218, 218, 0.2);
+  cursor: pointer;
+}
+.seek::-webkit-slider-thumb {
+  background: #d3d3d3;
+  height: 13px;
+  width: 13px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.seek::-moz-range-thumb {
+  background: #d3d3d3;
+  height: 13px;
+  width: 13px;
+  border-radius: 20px;
+  cursor: pointer;
+}/*# sourceMappingURL=Footer.css.map */

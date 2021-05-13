@@ -1,0 +1,48 @@
+@use './common';
+
+/* ========
+	Resets
+	======= */
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+img {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+
+svg {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+button {
+	color: inherit;
+	background: inherit;
+	outline: none;
+	font: inherit;
+	border: 0;
+}
+
+input[type='range'] {
+	-webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+
+	&::-webkit-slider-thumb {
+		-webkit-appearance: none;
+	}
+}
+
+/* ===============
+	Global Styles
+	=============== */
+
+body {
+	font-family: Raleway, sans-serif;
+	color: common.$text-light;
+}

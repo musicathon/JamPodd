@@ -1,2 +1,45 @@
+/* ========
+	Resets
+	======= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/*# sourceMappingURL=App.css.map *//*# sourceMappingURL=App.css.map */
+img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+button {
+  color: inherit;
+  background: inherit;
+  outline: none;
+  font: inherit;
+  border: 0;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  /* Hides the slider so that custom slider can be made */
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+/* ===============
+	Global Styles
+	=============== */
+body {
+  font-family: Raleway, sans-serif;
+  color: #d3d3d3;
+}/*# sourceMappingURL=App.css.map */
