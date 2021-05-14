@@ -50,23 +50,47 @@
 	&__btns {
 		display: flex;
 		align-items: center;
-		gap: 0.3em;
+		gap: 0.5em;
 	}
 
 	&__btn {
+		transition: transform 50ms ease-in-out, filter 50ms ease-in-out;
+
+		svg {
+			fill: common.$text-light;
+		}
+
 		&.--primary {
-			width: 3.25em;
-			fill: common.$primary;
+			width: 3em;
+
+			&:active {
+				transform: scale(0.95);
+			}
+
+			&.--active svg {
+				fill: common.$primary;
+			}
 		}
 
 		&.--secondary {
-			width: 3em;
-			fill: common.$text-light;
+			width: 2.5em;
+
+			&:active {
+				filter: brightness(80%);
+				transform: scale(0.97);
+			}
 		}
 
 		&.--tertiary {
-			width: 1.75em;
-			fill: common.$text-light;
+			width: 1.5em;
+
+			&:active {
+				transform: scale(0.97);
+			}
+
+			&.--active svg {
+				fill: common.$primary;
+			}
 		}
 	}
 
@@ -85,7 +109,10 @@
 
 	&__btn {
 		width: 1.75em;
-		fill: common.$text-light;
+
+		svg {
+			fill: common.$text-light;
+		}
 	}
 
 	&__seek {
