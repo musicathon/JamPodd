@@ -43,6 +43,9 @@ const Footer = ({ tracks, startingIndex }) => {
 			audioRef.current.pause();
 			stopUpdatingSeek();
 		}
+
+		// stfu linter:
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isPlaying]);
 
 	// change tracks
@@ -57,9 +60,6 @@ const Footer = ({ tracks, startingIndex }) => {
 	};
 
 	useEffect(() => {
-		// stop current playback
-		audioRef.current.pause();
-
 		audioRef.current = new Audio(audioSrc);
 
 		if (isReady) {
@@ -69,6 +69,12 @@ const Footer = ({ tracks, startingIndex }) => {
 		} else {
 			setIsReady(true);
 		}
+
+		// stop previous playback
+		return () => audioRef.current.pause();
+
+		// stfu linter:
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [trackIndex]);
 
 	// scrubbing functionality
@@ -106,8 +112,8 @@ const Footer = ({ tracks, startingIndex }) => {
 		`;
 
 	return (
-		<footer className='footer'>
-			<div className='footer__cntr song'>
+		<footer>
+			<div className='song'>
 				<div className='song__img-cntr'>
 					<img src={imageSrc} alt='song art' />
 				</div>
@@ -117,7 +123,7 @@ const Footer = ({ tracks, startingIndex }) => {
 				</div>
 			</div>
 
-			<div className='footer__cntr player'>
+			<div className='player'>
 				<div className='player__btns'>
 					<button className='player__btn --tertiary'>
 						<IoRepeatOutline />
@@ -152,7 +158,7 @@ const Footer = ({ tracks, startingIndex }) => {
 				/>
 			</div>
 
-			<div className='footer__cntr volume'>
+			<div className='volume'>
 				<button className='volume__btn'>
 					<IoVolumeMedium />
 				</button>
@@ -165,7 +171,6 @@ const Footer = ({ tracks, startingIndex }) => {
 					style={{ background: volumeBarStyle }}
 					className='volume__bar bar'
 					onChange={(e) => onVolumeChange(e.target.value)}
-					onMouseUp={onSeekEnd}
 				/>
 			</div>
 		</footer>

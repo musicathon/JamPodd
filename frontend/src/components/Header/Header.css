@@ -1,0 +1,44 @@
+header {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  background: #0f1626;
+  padding: 1em 3em;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.logo {
+  justify-content: flex-start;
+}
+.logo__title {
+  font-weight: 700;
+  font-size: 1.5em;
+}
+
+.nav ul {
+  display: flex;
+  gap: 4em;
+}
+.nav a {
+  font-weight: 600;
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.nav a.--active {
+  color: #ef3355;
+}
+.nav__icon-cntr {
+  width: 1em;
+}
+
+.logout {
+  justify-self: end;
+}
+.logout svg {
+  width: 1em;
+  height: 1em;
+}/*# sourceMappingURL=Header.css.map */

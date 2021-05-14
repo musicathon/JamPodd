@@ -1,10 +1,12 @@
 import './App.css';
 import { useState } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import ProtectedRoute from './components/ProtectedRoute';
-import LogoutButton from './components/LogoutButton/LogoutButton';
+import { Switch } from 'react-router-dom';
+import ConditionalRoute from './components/ConditionalRoute';
 import LoginPage from './components/LoginPage/LoginPage';
+import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import Explore from './components/Explore/Explore';
+import Playlists from './components/Playlists/Playlists';
 
 function App() {
 	const [isAuth, setIsAuth] = useState(false);
@@ -47,25 +49,51 @@ function App() {
 	return (
 		<>
 			<Switch>
-				<Route exact path='/login'>
+				<ConditionalRoute
+					condition={!isAuth}
+					exact
+					path='/login'
+					redirectPath='/'
+				>
 					<LoginPage setIsAuth={setIsAuth} />
-				</Route>
+				</ConditionalRoute>
 
-				<ProtectedRoute path='/' isAuth={isAuth}>
-					<LogoutButton setIsAuth={setIsAuth} />
+				<ConditionalRoute condition={isAuth} path='/' redirectPath='/login'>
+					<Header setIsAuth={setIsAuth} />
 					<Switch>
-						<ProtectedRoute path='/explore' isAuth={isAuth}>
-							Explore
-						</ProtectedRoute>
-						<ProtectedRoute path='/playlists' isAuth={isAuth}>
-							Playlists
-						</ProtectedRoute>
-						<ProtectedRoute path='/playlist' isAuth={isAuth}>
-							Playlist
-						</ProtectedRoute>
+						{/* redirect '/' to '/explore' */}
+						<ConditionalRoute
+							condition={false}
+							exact
+							path='/'
+							redirectPath='/explore'
+						/>
+						<ConditionalRoute
+							condition={isAuth}
+							exact
+							path='/explore'
+							redirectPath='/login'
+						>
+							<Explore />
+						</ConditionalRoute>
+						<ConditionalRoute
+							condition={isAuth}
+							exact
+							path='/playlists'
+							redirectPath='/login'
+						>
+							<Playlists />
+						</ConditionalRoute>
+						<ConditionalRoute
+							condition={isAuth}
+							path='/playlist'
+							redirectPath='/login'
+						>
+							A Playlist
+						</ConditionalRoute>
 					</Switch>
 					<Footer tracks={tracks} />
-				</ProtectedRoute>
+				</ConditionalRoute>
 			</Switch>
 		</>
 	);

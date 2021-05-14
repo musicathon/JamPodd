@@ -11,6 +11,7 @@
 }
 
 img {
+	display: block;
 	height: 100%;
 	width: 100%;
 	object-fit: cover;
@@ -25,9 +26,19 @@ svg {
 button {
 	color: inherit;
 	background: inherit;
-	outline: none;
 	font: inherit;
-	border: 0;
+	outline: none;
+	border: none;
+}
+
+a {
+	color: inherit;
+	font: inherit;
+	text-decoration: none;
+}
+
+ul {
+	list-style: none;
 }
 
 input[type='range'] {
@@ -45,4 +56,9 @@ input[type='range'] {
 body {
 	font-family: Raleway, sans-serif;
 	color: common.$text-light;
+}
+
+.temp {
+	color: black;
+	font-size: 2em;
 }

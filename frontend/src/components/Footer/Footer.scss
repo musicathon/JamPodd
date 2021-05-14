@@ -1,6 +1,6 @@
 @use '../../common';
 
-.footer {
+footer {
 	width: 100%;
 	position: fixed;
 	bottom: 0;
@@ -13,8 +13,9 @@
 }
 
 .song {
+	justify-self: start;
 	display: flex;
-	justify-content: flex-start;
+
 	gap: 1em;
 
 	&__img-cntr {
@@ -102,8 +103,8 @@
 }
 
 .volume {
+	justify-self: end;
 	display: flex;
-	justify-content: flex-end;
 	align-items: center;
 	gap: 1.25em;
 

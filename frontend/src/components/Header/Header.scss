@@ -1,0 +1,55 @@
+@use '../../common';
+
+header {
+	width: 100%;
+	position: sticky;
+	top: 0;
+
+	background: common.$bg-darker;
+	padding: 1em 3em;
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: center;
+}
+
+.logo {
+	justify-content: flex-start;
+
+	&__title {
+		font-weight: 700;
+		font-size: 1.5em;
+	}
+}
+
+.nav {
+	ul {
+		display: flex;
+		gap: 4em;
+	}
+
+	a {
+		font-weight: 600;
+		font-size: 1.5em;
+		display: flex;
+		align-items: center;
+		gap: 0.5em;
+
+		&.--active {
+			color: common.$primary;
+		}
+	}
+
+	&__icon-cntr {
+		width: 1em;
+	}
+}
+
+.logout {
+	justify-self: end;
+
+	//temp
+	svg {
+		width: 1em;
+		height: 1em;
+	}
+}
