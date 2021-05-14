@@ -1,9 +1,14 @@
 import './App.css';
+import { useState } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import ProtectedRoute from './components/ProtectedRoute';
+import LogoutButton from './components/LogoutButton/LogoutButton';
+import LoginPage from './components/LoginPage/LoginPage';
 import Footer from './components/Footer/Footer';
-import LoginHook from './components/LoginHook';
-import LogoutHook from './components/LogoutHook';
 
 function App() {
+	const [isAuth, setIsAuth] = useState(false);
+
 	const tracks = [
 		{
 			title: 'Detergent',
@@ -38,12 +43,30 @@ function App() {
 			imageSrc: 'https://source.unsplash.com/random/199x199'
 		}
 	];
+
 	return (
 		<>
-			<LoginHook />
-			<br></br>
-			<LogoutHook />
-			<Footer tracks={tracks} startingIndex={0} />
+			<Switch>
+				<Route exact path='/login'>
+					<LoginPage setIsAuth={setIsAuth} />
+				</Route>
+
+				<ProtectedRoute path='/' isAuth={isAuth}>
+					<LogoutButton setIsAuth={setIsAuth} />
+					<Switch>
+						<ProtectedRoute path='/explore' isAuth={isAuth}>
+							Explore
+						</ProtectedRoute>
+						<ProtectedRoute path='/playlists' isAuth={isAuth}>
+							Playlists
+						</ProtectedRoute>
+						<ProtectedRoute path='/playlist' isAuth={isAuth}>
+							Playlist
+						</ProtectedRoute>
+					</Switch>
+					<Footer tracks={tracks} />
+				</ProtectedRoute>
+			</Switch>
 		</>
 	);
 }
