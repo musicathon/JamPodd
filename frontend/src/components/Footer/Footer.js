@@ -1,4 +1,4 @@
-// TODO: Add volume functionality, shuffle, and repeat
+// TODO: Add shuffle, and repeat
 
 import { useState, useEffect, useRef } from 'react';
 import './Footer.css';
@@ -9,6 +9,7 @@ import { IoShuffleOutline, IoRepeatOutline, IoVolumeMedium } from 'react-icons/i
 const Footer = ({ tracks, startingIndex }) => {
 	const [trackIndex, setTrackIndex] = useState(startingIndex); // index of the track in tracks
 	const [trackProgress, setTrackProgress] = useState(0); // stores track progress in seconds
+	const [volume, setVolume] = useState(1); // stores volume
 	const [isPlaying, setIsPlaying] = useState(false); // play/pause state
 	const [isReady, setIsReady] = useState(false); // simply prevents playback on page load
 
@@ -71,27 +72,37 @@ const Footer = ({ tracks, startingIndex }) => {
 	}, [trackIndex]);
 
 	// scrubbing functionality
-	const onScrub = (value) => {
+	const onSeek = (value) => {
 		stopUpdatingSeek();
 
 		audioRef.current.currentTime = value;
-		setTrackProgress(audioRef.current.currentTime);
+		setTrackProgress(value);
 	};
 
-	const onScrubEnd = () => {
+	const onSeekEnd = () => {
 		// If not already playing, start
 		if (!isPlaying) setIsPlaying(true);
 
 		startUpdatingSeek();
 	};
 
+	const onVolumeChange = (value) => {
+		audioRef.current.volume = value;
+		setVolume(value);
+	};
+
 	// get % of track progress
 	const { duration } = audioRef.current;
-	const currentPercentage = duration ? (trackProgress / duration) * 100 : 0;
+	const trackPerc = duration ? (trackProgress / duration) * 100 : 0,
+		volumePerc = volume * 100;
 
 	// range input styling because css sux
-	const trackStyling = `
-  		-webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}%, #ef3355), color-stop(${currentPercentage}%, rgba(218, 218, 218, 0.2)))
+	const seekStyle = `
+  		-webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${trackPerc}%, #ef3355), color-stop(${trackPerc}%, rgba(218, 218, 218, 0.2)))
+		`;
+
+	const volumeBarStyle = `
+  		-webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${volumePerc}%, #ef3355), color-stop(${volumePerc}%, rgba(218, 218, 218, 0.2)))
 		`;
 
 	return (
@@ -133,11 +144,11 @@ const Footer = ({ tracks, startingIndex }) => {
 					step='0.5'
 					min='0'
 					max={duration ? duration : `${duration}`}
-					style={{ background: trackStyling }}
-					className='player__seek seek'
-					onChange={(e) => onScrub(e.target.value)}
-					onMouseUp={onScrubEnd}
-					onKeyUp={onScrubEnd}
+					style={{ background: seekStyle }}
+					className='player__bar bar'
+					onChange={(e) => onSeek(e.target.value)}
+					onMouseUp={onSeekEnd}
+					onKeyUp={onSeekEnd}
 				/>
 			</div>
 
@@ -147,10 +158,14 @@ const Footer = ({ tracks, startingIndex }) => {
 				</button>
 				<input
 					type='range'
-					step='1'
+					value={volume}
+					step='0.02'
 					min='0'
-					max='100'
-					className='volume__seek seek'
+					max='1'
+					style={{ background: volumeBarStyle }}
+					className='volume__bar bar'
+					onChange={(e) => onVolumeChange(e.target.value)}
+					onMouseUp={onSeekEnd}
 				/>
 			</div>
 		</footer>

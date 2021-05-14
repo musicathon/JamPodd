@@ -76,7 +76,7 @@
 .player__btn.--tertiary.--active svg {
   fill: #ef3355;
 }
-.player__seek {
+.player__bar {
   min-width: 250px;
   width: 175%;
   max-width: 500px;
@@ -94,26 +94,26 @@
 .volume__btn svg {
   fill: #d3d3d3;
 }
-.volume__seek {
+.volume__bar {
   min-width: 125px;
   width: 10%;
   max-width: 150px;
 }
 
-.seek {
+.bar {
   height: 6px;
   border-radius: 5px;
   background: rgba(218, 218, 218, 0.2);
   cursor: pointer;
 }
-.seek::-webkit-slider-thumb {
+.bar::-webkit-slider-thumb {
   background: #d3d3d3;
   height: 13px;
   width: 13px;
   border-radius: 20px;
   cursor: pointer;
 }
-.seek::-moz-range-thumb {
+.bar::-moz-range-thumb {
   background: #d3d3d3;
   height: 13px;
   width: 13px;

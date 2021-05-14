@@ -94,7 +94,7 @@
 		}
 	}
 
-	&__seek {
+	&__bar {
 		min-width: 250px;
 		width: 175%;
 		max-width: 500px;
@@ -115,7 +115,7 @@
 		}
 	}
 
-	&__seek {
+	&__bar {
 		min-width: 125px;
 		width: 10%;
 		max-width: 150px;
@@ -130,7 +130,7 @@
 	cursor: pointer;
 }
 
-.seek {
+.bar {
 	height: 6px;
 	border-radius: 5px;
 	background: common.$faded;
