@@ -3,9 +3,15 @@ import Footer from './components/Footer/Footer';
 import LoginHook from './components/LoginHook';
 import LogoutHook from './components/LogoutHook';
 
-
 function App() {
 	const tracks = [
+		{
+			title: 'Detergent',
+			artist: 'Dylan Sitts',
+			audioSrc: '/assets/det.mp3',
+			imageSrc:
+				'https://d34qmkt8w5wll9.cloudfront.net/commercial-releases/cover_art/jpeg/3730.jpg'
+		},
 		{
 			title: 'Hot Heat',
 			artist: 'Youtube Audio Library',
@@ -22,7 +28,8 @@ function App() {
 			title: 'Sky High',
 			artist: 'Electronomia',
 			audioSrc: '/assets/sh.mp3',
-			imageSrc: 'https://linkstorage.linkfire.com/medialinks/images/27a334a4-35f8-45f1-980f-6dc187a2132e/artwork-440x440.jpg'
+			imageSrc:
+				'https://linkstorage.linkfire.com/medialinks/images/27a334a4-35f8-45f1-980f-6dc187a2132e/artwork-440x440.jpg'
 		},
 		{
 			title: 'Another World',
@@ -33,9 +40,9 @@ function App() {
 	];
 	return (
 		<>
-		<LoginHook />
-		<br></br>
-      	<LogoutHook />
+			<LoginHook />
+			<br></br>
+			<LogoutHook />
 			<Footer tracks={tracks} startingIndex={0} />
 		</>
 	);
