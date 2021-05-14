@@ -1,5 +1,8 @@
 import './App.css';
 import Footer from './components/Footer/Footer';
+import LoginHook from './components/LoginHook';
+import LogoutHook from './components/LogoutHook';
+
 
 function App() {
 	const tracks = [
@@ -30,6 +33,9 @@ function App() {
 	];
 	return (
 		<>
+		<LoginHook />
+		<br></br>
+      	<LogoutHook />
 			<Footer tracks={tracks} startingIndex={0} />
 		</>
 	);
