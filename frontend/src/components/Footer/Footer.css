@@ -43,19 +43,38 @@
 .player__btns {
   display: flex;
   align-items: center;
-  gap: 0.3em;
+  gap: 0.5em;
+}
+.player__btn {
+  transition: transform 50ms ease-in-out, filter 50ms ease-in-out;
+}
+.player__btn svg {
+  fill: #d3d3d3;
 }
 .player__btn.--primary {
-  width: 3.25em;
+  width: 3em;
+}
+.player__btn.--primary:active {
+  transform: scale(0.95);
+}
+.player__btn.--primary.--active svg {
   fill: #ef3355;
 }
 .player__btn.--secondary {
-  width: 3em;
-  fill: #d3d3d3;
+  width: 2.5em;
+}
+.player__btn.--secondary:active {
+  filter: brightness(80%);
+  transform: scale(0.97);
 }
 .player__btn.--tertiary {
-  width: 1.75em;
-  fill: #d3d3d3;
+  width: 1.5em;
+}
+.player__btn.--tertiary:active {
+  transform: scale(0.97);
+}
+.player__btn.--tertiary.--active svg {
+  fill: #ef3355;
 }
 .player__seek {
   min-width: 250px;
@@ -71,6 +90,8 @@
 }
 .volume__btn {
   width: 1.75em;
+}
+.volume__btn svg {
   fill: #d3d3d3;
 }
 .volume__seek {

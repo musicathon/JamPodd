@@ -1,14 +1,10 @@
-// TODO: Add volume functionality
+// TODO: Add volume functionality, shuffle, and repeat
 
 import { useState, useEffect, useRef } from 'react';
 import './Footer.css';
-import { AiFillPlayCircle } from 'react-icons/ai';
+import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai';
 import { BiSkipNext, BiSkipPrevious } from 'react-icons/bi';
-import {
-	IoShuffleOutline,
-	IoRepeatOutline,
-	IoVolumeMedium
-} from 'react-icons/io5';
+import { IoShuffleOutline, IoRepeatOutline, IoVolumeMedium } from 'react-icons/io5';
 
 const Footer = ({ tracks, startingIndex }) => {
 	const [trackIndex, setTrackIndex] = useState(startingIndex); // index of the track in tracks
@@ -115,22 +111,16 @@ const Footer = ({ tracks, startingIndex }) => {
 					<button className='player__btn --tertiary'>
 						<IoRepeatOutline />
 					</button>
-					<button
-						className='player__btn --secondary'
-						onClick={toPrevTrack}
-					>
+					<button className='player__btn --secondary' onClick={toPrevTrack}>
 						<BiSkipPrevious />
 					</button>
 					<button
-						className='player__btn --primary'
+						className={`player__btn --primary ${isPlaying ? '--active' : ''}`}
 						onClick={pausePlay}
 					>
-						<AiFillPlayCircle />
+						{isPlaying ? <AiFillPauseCircle /> : <AiFillPlayCircle />}
 					</button>
-					<button
-						className='player__btn --secondary'
-						onClick={toNextTrack}
-					>
+					<button className='player__btn --secondary' onClick={toNextTrack}>
 						<BiSkipNext />
 					</button>
 					<button className='player__btn --tertiary'>
@@ -140,7 +130,7 @@ const Footer = ({ tracks, startingIndex }) => {
 				<input
 					type='range'
 					value={trackProgress}
-					step='1'
+					step='0.5'
 					min='0'
 					max={duration ? duration : `${duration}`}
 					style={{ background: trackStyling }}
