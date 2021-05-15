@@ -1,0 +1,72 @@
+@use '../../common';
+
+main {
+	display: flex;
+	flex-flow: column;
+	gap: 1em;
+}
+
+.playlists {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(16em, 1fr));
+	gap: 2em;
+}
+
+.add-playlist {
+	border: common.$primary 2px dashed;
+
+	&__icon-cntr {
+		width: 50%;
+		height: 50%;
+		margin: auto;
+	}
+
+	svg {
+		color: common.$primary;
+	}
+}
+
+.playlist {
+	max-width: 18em;
+
+	display: flex;
+	flex-flow: column;
+	border-radius: 10px;
+	overflow: hidden;
+	background: common.$bg-darker;
+	box-shadow: 4px 2px 10px rgba(0, 0, 0, 0.15);
+
+	&__img-cntr {
+		height: 9em;
+	}
+
+	&__info {
+		padding: 1em;
+		display: flex;
+		flex-flow: column;
+		gap: 0.75em;
+	}
+
+	&__title-cntr {
+		height: 3.5em;
+		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&__extra {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&__song-count {
+		font-weight: 500;
+		font-size: 1.125em;
+	}
+
+	&__btn {
+		width: 2em;
+	}
+}

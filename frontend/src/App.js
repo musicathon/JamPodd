@@ -9,7 +9,7 @@ import Explore from './components/Explore/Explore';
 import Playlists from './components/Playlists/Playlists';
 
 function App() {
-	const [isAuth, setIsAuth] = useState(false);
+	const [isAuth, setIsAuth] = useState(true);
 
 	const tracks = [
 		{
@@ -43,6 +43,34 @@ function App() {
 			artist: 'Vybloom',
 			audioSrc: '/assets/aw.mp3',
 			imageSrc: 'https://source.unsplash.com/random/199x199'
+		}
+	];
+
+	const playlists = [
+		{
+			title: 'Indie',
+			songCount: 65,
+			imgSrc: 'https://source.unsplash.com/random/'
+		},
+		{
+			title: 'Truth or Consequences',
+			songCount: 9,
+			imgSrc: 'https://media.pitchfork.com/photos/5e6bb1b2690af00008f803fa/1:1/w_600/Truth%20or%20Consequences_Yumi%20Zouma.jpg'
+		},
+		{
+			title: 'Safety',
+			songCount: 6,
+			imgSrc: 'https://i1.sndcdn.com/artworks-vXenm8RPv3AE8grN-5tyRHQ-t500x500.jpg'
+		},
+		{
+			title: 'lofi',
+			songCount: 47,
+			imgSrc: 'https://is2-ssl.mzstatic.com/image/thumb/Music124/v4/eb/09/35/eb0935a7-d940-2583-51ca-ed4007752e3b/cover.jpg/400x400bb.jpeg'
+		},
+		{
+			title: 'Attack on Titan',
+			songCount: 7,
+			imgSrc: 'https://wallpaperaccess.com/full/279058.jpg'
 		}
 	];
 
@@ -82,7 +110,7 @@ function App() {
 							path='/playlists'
 							redirectPath='/login'
 						>
-							<Playlists />
+							<Playlists playlists={playlists} />
 						</ConditionalRoute>
 						<ConditionalRoute
 							condition={isAuth}

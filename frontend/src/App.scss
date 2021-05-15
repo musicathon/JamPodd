@@ -54,11 +54,24 @@ input[type='range'] {
 	=============== */
 
 body {
-	font-family: Raleway, sans-serif;
+	font-family: Cabin, sans-serif;
 	color: common.$text-light;
+	background: common.$bg-dark;
 }
 
-.temp {
-	color: black;
-	font-size: 2em;
+main {
+	padding: 2em 3em 3em 3em;
+	margin-bottom: 5em;
+}
+
+h2 {
+	font-weight: 600;
+	font-size: 1.5em;
+}
+
+h4 {
+	font-weight: 500;
+	font-size: 1.125em;
+	text-transform: uppercase;
+	color: common.$primary;
 }
