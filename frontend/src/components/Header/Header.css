@@ -31,6 +31,9 @@ header {
 .nav a.--active {
   color: #ef3355;
 }
+.nav a.--active svg {
+  fill: #ef3355;
+}
 .nav__icon-cntr {
   width: 1em;
 }

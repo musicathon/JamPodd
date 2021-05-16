@@ -63,9 +63,6 @@ footer {
 .volume__btn {
   width: 1.75em;
 }
-.volume__btn svg {
-  fill: #d3d3d3;
-}
 .volume__bar {
   min-width: 125px;
   width: 10%;

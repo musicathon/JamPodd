@@ -36,6 +36,10 @@ header {
 
 		&.--active {
 			color: common.$primary;
+
+			svg {
+				fill: common.$primary;
+			}
 		}
 	}
 
