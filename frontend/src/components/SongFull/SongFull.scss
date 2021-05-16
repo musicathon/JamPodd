@@ -1,0 +1,66 @@
+@use '../../common';
+
+.songsmall__img-cntr {
+	position: relative;
+	z-index: 1;
+}
+
+.songfull {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.5em 0.75em;
+	border-radius: 10px;
+
+	&__btn {
+		&.--play {
+			transition: opacity 50ms ease-in-out;
+			position: absolute;
+			opacity: 0;
+			z-index: -1;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			padding: 4px;
+
+			svg {
+				fill: common.$primary;
+			}
+		}
+
+		&.--delete {
+			width: 1.5em;
+		}
+	}
+
+	transition: background 50ms ease-in-out;
+	&.--hover {
+		background: common.$faded;
+
+		.songfull__btn.--play {
+			opacity: 1;
+			z-index: 9;
+		}
+	}
+
+	&__cntr {
+		&:not(:last-child) {
+			margin-right: 2em;
+		}
+
+		&.--expand {
+			flex: 200px 1 1;
+		}
+
+		&.--placeholder {
+			width: 4em;
+			text-align: right;
+		}
+	}
+
+	&__album,
+	&__duration {
+		font-size: 1.15em;
+		font-weight: 500;
+	}
+}

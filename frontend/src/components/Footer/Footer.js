@@ -1,4 +1,4 @@
-// TODO: Add shuffle, and repeat
+// TODO: Add shuffle, and repeat, duration, and default song
 
 import { useState, useEffect, useRef } from 'react';
 import './Footer.css';
@@ -66,6 +66,24 @@ const Footer = ({ tracks, startingIndex }) => {
 			audioRef.current.play();
 			setIsPlaying(true);
 			startUpdatingSeek();
+		}
+
+		// stop previous playback
+		return () => audioRef.current.pause();
+
+		// stfu linter:
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [trackIndex]);
+
+	// reset footer when tracks array changes
+	useEffect(() => {
+		setTrackIndex(startingIndex);
+		audioRef.current = new Audio(audioSrc);
+
+		if (isReady) {
+			audioRef.current.play();
+			setIsPlaying(true);
+			startUpdatingSeek();
 		} else {
 			setIsReady(true);
 		}
@@ -75,7 +93,7 @@ const Footer = ({ tracks, startingIndex }) => {
 
 		// stfu linter:
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [trackIndex]);
+	}, [tracks]);
 
 	// scrubbing functionality
 	const onSeek = (value) => {
@@ -113,13 +131,13 @@ const Footer = ({ tracks, startingIndex }) => {
 
 	return (
 		<footer>
-			<div className='song'>
-				<div className='song__img-cntr'>
+			<div className='songsmall'>
+				<div className='songsmall__img-cntr'>
 					<img src={imageSrc} alt='song art' />
 				</div>
-				<div className='song__info'>
-					<span className='song__name'>{title}</span>
-					<span className='song__artist'>{artist}</span>
+				<div className='songsmall__info'>
+					<span className='songsmall__name'>{title}</span>
+					<span className='songsmall__artist'>{artist}</span>
 				</div>
 			</div>
 
@@ -178,7 +196,17 @@ const Footer = ({ tracks, startingIndex }) => {
 };
 
 Footer.defaultProps = {
-	tracks: {},
+	tracks: [
+		{
+			title: 'Detergent',
+			artist: 'Dylan Sitts',
+			album: 'Venture',
+			duration: { min: 6, sec: 5 },
+			audioSrc: '',
+			imageSrc:
+				'https://d34qmkt8w5wll9.cloudfront.net/commercial-releases/cover_art/jpeg/3730.jpg'
+		}
+	],
 	startingIndex: 0
 };
 

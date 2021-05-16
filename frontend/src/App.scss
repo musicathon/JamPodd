@@ -64,6 +64,11 @@ main {
 	margin-bottom: 5em;
 }
 
+h1 {
+	font-size: 2.5em;
+	font-weight: 700;
+}
+
 h2 {
 	font-weight: 600;
 	font-size: 1.5em;
@@ -74,4 +79,38 @@ h4 {
 	font-size: 1.125em;
 	text-transform: uppercase;
 	color: common.$primary;
+}
+
+svg {
+	fill: common.$text-light;
+}
+
+.songsmall {
+	justify-self: start;
+	display: flex;
+
+	gap: 1em;
+
+	&__img-cntr {
+		border-radius: 5px;
+		overflow: hidden;
+		width: 3em;
+		height: 3em;
+	}
+
+	&__info {
+		display: flex;
+		flex-flow: column;
+		justify-content: space-between;
+	}
+
+	&__name {
+		font-weight: 500;
+		font-size: 1.25em;
+	}
+
+	&__artist {
+		font-weight: 400;
+		font-size: 0.9375em;
+	}
 }

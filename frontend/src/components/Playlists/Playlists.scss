@@ -1,32 +1,29 @@
 @use '../../common';
 
-main {
-	display: flex;
-	flex-flow: column;
-	gap: 1em;
-}
-
 .playlists {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(16em, 1fr));
-	gap: 2em;
+	&__main {
+		display: flex;
+		flex-flow: column;
+		gap: 1em;
+	}
+
+	&__list {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(16em, 1fr));
+		gap: 2em;
+	}
 }
 
-.add-playlist {
+.addpl {
 	border: common.$primary 2px dashed;
-
-	&__icon-cntr {
-		width: 50%;
-		height: 50%;
-		margin: auto;
-	}
+	padding: 25%;
 
 	svg {
 		color: common.$primary;
 	}
 }
 
-.playlist {
+.plcard {
 	max-width: 18em;
 
 	display: flex;

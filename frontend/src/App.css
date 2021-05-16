@@ -61,6 +61,11 @@ main {
   margin-bottom: 5em;
 }
 
+h1 {
+  font-size: 2.5em;
+  font-weight: 700;
+}
+
 h2 {
   font-weight: 600;
   font-size: 1.5em;
@@ -71,4 +76,33 @@ h4 {
   font-size: 1.125em;
   text-transform: uppercase;
   color: #ef3355;
+}
+
+svg {
+  fill: #d3d3d3;
+}
+
+.songsmall {
+  justify-self: start;
+  display: flex;
+  gap: 1em;
+}
+.songsmall__img-cntr {
+  border-radius: 5px;
+  overflow: hidden;
+  width: 3em;
+  height: 3em;
+}
+.songsmall__info {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+.songsmall__name {
+  font-weight: 500;
+  font-size: 1.25em;
+}
+.songsmall__artist {
+  font-weight: 400;
+  font-size: 0.9375em;
 }/*# sourceMappingURL=App.css.map */

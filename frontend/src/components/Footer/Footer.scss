@@ -12,36 +12,6 @@ footer {
 	align-items: center;
 }
 
-.song {
-	justify-self: start;
-	display: flex;
-
-	gap: 1em;
-
-	&__img-cntr {
-		border-radius: 5px;
-		overflow: hidden;
-		width: 3em;
-		height: 3em;
-	}
-
-	&__info {
-		display: flex;
-		flex-flow: column;
-		justify-content: space-between;
-	}
-
-	&__name {
-		font-weight: 600;
-		font-size: 1.25em;
-	}
-
-	&__artist {
-		font-weight: 500;
-		font-size: 0.9375em;
-	}
-}
-
 .player {
 	display: flex;
 	flex-flow: column;
@@ -56,10 +26,6 @@ footer {
 
 	&__btn {
 		transition: transform 50ms ease-in-out, filter 50ms ease-in-out;
-
-		svg {
-			fill: common.$text-light;
-		}
 
 		&.--primary {
 			width: 3em;

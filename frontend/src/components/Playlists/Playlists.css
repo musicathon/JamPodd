@@ -1,28 +1,23 @@
-main {
+.playlists__main {
   display: flex;
   flex-flow: column;
   gap: 1em;
 }
-
-.playlists {
+.playlists__list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(16em, 1fr));
   gap: 2em;
 }
 
-.add-playlist {
+.addpl {
   border: #ef3355 2px dashed;
+  padding: 25%;
 }
-.add-playlist__icon-cntr {
-  width: 50%;
-  height: 50%;
-  margin: auto;
-}
-.add-playlist svg {
+.addpl svg {
   color: #ef3355;
 }
 
-.playlist {
+.plcard {
   max-width: 18em;
   display: flex;
   flex-flow: column;
@@ -31,31 +26,31 @@ main {
   background: #0f1626;
   box-shadow: 4px 2px 10px rgba(0, 0, 0, 0.15);
 }
-.playlist__img-cntr {
+.plcard__img-cntr {
   height: 9em;
 }
-.playlist__info {
+.plcard__info {
   padding: 1em;
   display: flex;
   flex-flow: column;
   gap: 0.75em;
 }
-.playlist__title-cntr {
+.plcard__title-cntr {
   height: 3.5em;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.playlist__extra {
+.plcard__extra {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.playlist__song-count {
+.plcard__song-count {
   font-weight: 500;
   font-size: 1.125em;
 }
-.playlist__btn {
+.plcard__btn {
   width: 2em;
 }/*# sourceMappingURL=Playlists.css.map */

@@ -1,0 +1,78 @@
+@use '../../common';
+
+.plpage {
+	&__main {
+		display: flex;
+		gap: 3em;
+	}
+}
+
+.plinfo {
+	flex: 400px 0 1;
+
+	display: flex;
+	flex-flow: column;
+	gap: 1.5em;
+
+	h4 {
+		margin-bottom: -0.5em;
+	}
+
+	&__img-cntr {
+		height: 15em;
+		border-radius: 10px;
+		overflow: hidden;
+	}
+
+	&__title {
+		text-align: center;
+	}
+
+	&__extra {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&__song-count {
+		font-size: 1.25em;
+		font-weight: 500;
+	}
+
+	&__btns {
+		display: flex;
+		align-items: center;
+		gap: 1em;
+	}
+
+	&__btn {
+		transition: transform 50ms ease-in-out;
+
+		&:active {
+			transform: scale(0.95);
+		}
+
+		&.--play {
+			width: 3.25em;
+
+			svg {
+				fill: common.$primary;
+			}
+		}
+
+		&.--shuffle {
+			width: 2.65em;
+			height: 2.65em;
+			padding: 0.4em;
+			border-radius: 20px;
+			background: common.$faded;
+		}
+	}
+}
+
+.songlist {
+	flex: 850px 2 1;
+	display: flex;
+	flex-flow: column;
+	gap: 0.5em;
+}

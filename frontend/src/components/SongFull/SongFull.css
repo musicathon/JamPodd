@@ -1,0 +1,50 @@
+.songsmall__img-cntr {
+  position: relative;
+  z-index: 1;
+}
+
+.songfull {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 0.75em;
+  border-radius: 10px;
+  transition: background 50ms ease-in-out;
+}
+.songfull__btn.--play {
+  transition: opacity 50ms ease-in-out;
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+}
+.songfull__btn.--play svg {
+  fill: #ef3355;
+}
+.songfull__btn.--delete {
+  width: 1.5em;
+}
+.songfull.--hover {
+  background: rgba(218, 218, 218, 0.2);
+}
+.songfull.--hover .songfull__btn.--play {
+  opacity: 1;
+  z-index: 9;
+}
+.songfull__cntr:not(:last-child) {
+  margin-right: 2em;
+}
+.songfull__cntr.--expand {
+  flex: 200px 1 1;
+}
+.songfull__cntr.--placeholder {
+  width: 4em;
+  text-align: right;
+}
+.songfull__album, .songfull__duration {
+  font-size: 1.15em;
+  font-weight: 500;
+}/*# sourceMappingURL=SongFull.css.map */

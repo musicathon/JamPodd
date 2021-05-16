@@ -9,31 +9,6 @@ footer {
   align-items: center;
 }
 
-.song {
-  justify-self: start;
-  display: flex;
-  gap: 1em;
-}
-.song__img-cntr {
-  border-radius: 5px;
-  overflow: hidden;
-  width: 3em;
-  height: 3em;
-}
-.song__info {
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-}
-.song__name {
-  font-weight: 600;
-  font-size: 1.25em;
-}
-.song__artist {
-  font-weight: 500;
-  font-size: 0.9375em;
-}
-
 .player {
   display: flex;
   flex-flow: column;
@@ -47,9 +22,6 @@ footer {
 }
 .player__btn {
   transition: transform 50ms ease-in-out, filter 50ms ease-in-out;
-}
-.player__btn svg {
-  fill: #d3d3d3;
 }
 .player__btn.--primary {
   width: 3em;
