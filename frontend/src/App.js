@@ -8,11 +8,18 @@ import Footer from './components/Footer/Footer';
 import Explore from './components/Explore/Explore';
 import Playlists from './components/Playlists/Playlists';
 import PlayListPage from './components/PlaylistPage/PlaylistPage';
+import { useEffect } from 'react';
 
 function App() {
-	const [isAuth, setIsAuth] = useState(true);
-	const [startingIndex, setStartingIndex] = useState();
-	const playlistToPlay = useRef();
+	const [isAuth, setIsAuth] = useState(false);
+	const [currentTrackIndex, setCurrentTrackIndex] = useState();
+	const currentTrackList = useRef();
+
+	// reset currentTrackIndex and currentTrackList on logout
+	useEffect(() => {
+		setCurrentTrackIndex(undefined);
+		currentTrackList.current = undefined;
+	}, [isAuth]);
 
 	return (
 		<>
@@ -29,12 +36,12 @@ function App() {
 				<ConditionalRoute condition={isAuth} path='/' redirectPath='/login'>
 					<Header setIsAuth={setIsAuth} />
 					<Switch>
-						{/* redirect '/' to '/explore' */}
+						{/* redirect '/' to '/playlists' */}
 						<ConditionalRoute
 							condition={false}
 							exact
 							path='/'
-							redirectPath='/explore'
+							redirectPath='/playlists'
 						/>
 						<ConditionalRoute
 							condition={isAuth}
@@ -58,15 +65,19 @@ function App() {
 							redirectPath='/login'
 						>
 							<PlayListPage
-								playlistToPlay={playlistToPlay}
-								setStartingIndex={setStartingIndex}
+								currentTrackList={currentTrackList}
+								setCurrentTrackIndex={setCurrentTrackIndex}
 							/>
 						</ConditionalRoute>
 					</Switch>
-					<Footer
-						tracks={playlistToPlay.current}
-						startingIndex={startingIndex}
-					/>
+					{/* Only show Footer if a track list is playing */}
+					{currentTrackList.current && (
+						<Footer
+							currentTrackIndex={currentTrackIndex}
+							setCurrentTrackIndex={setCurrentTrackIndex}
+							currentTrackList={currentTrackList.current}
+						/>
+					)}
 				</ConditionalRoute>
 			</Switch>
 		</>

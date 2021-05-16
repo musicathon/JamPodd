@@ -1,19 +1,23 @@
-// TODO: Add shuffle, and repeat, duration, and default song
+// TODO: Add shuffle, and repeat, duration
 
 import { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import './Footer.css';
 import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai';
 import { BiSkipNext, BiSkipPrevious } from 'react-icons/bi';
 import { IoShuffleOutline, IoRepeatOutline, IoVolumeMedium } from 'react-icons/io5';
 
-const Footer = ({ tracks, startingIndex }) => {
-	const [trackIndex, setTrackIndex] = useState(startingIndex); // index of the track in tracks
+const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) => {
+	// animate on mount
+	const [isShown, setIsShown] = useState(false);
+	useEffect(() => setIsShown(true), []);
+
 	const [trackProgress, setTrackProgress] = useState(0); // stores track progress in seconds
 	const [volume, setVolume] = useState(1); // stores volume
 	const [isPlaying, setIsPlaying] = useState(false); // play/pause state
-	const [isReady, setIsReady] = useState(false); // simply prevents playback on page load
+	// const [isReady, setIsReady] = useState(false); // simply prevents playback on page load
 
-	const { title, artist, audioSrc, imageSrc } = tracks[trackIndex]; // get current track info
+	const { title, artist, audioSrc, imageSrc } = currentTrackList[currentTrackIndex]; // get current track info
 
 	const audioRef = useRef(new Audio(audioSrc)); // current track Audio object
 	const intervalRef = useRef(); // stores IDs of setInterval
@@ -50,50 +54,29 @@ const Footer = ({ tracks, startingIndex }) => {
 
 	// change tracks
 	const toPrevTrack = () => {
-		if (trackIndex === 0) setTrackIndex(tracks.length - 1);
-		else setTrackIndex(trackIndex - 1);
+		if (currentTrackIndex === 0) setCurrentTrackIndex(currentTrackList.length - 1);
+		else setCurrentTrackIndex(currentTrackIndex - 1);
 	};
 
 	const toNextTrack = () => {
-		if (trackIndex === tracks.length - 1) setTrackIndex(0);
-		else setTrackIndex(trackIndex + 1);
+		if (currentTrackIndex === currentTrackList.length - 1) setCurrentTrackIndex(0);
+		else setCurrentTrackIndex(currentTrackIndex + 1);
 	};
 
+	// reset audio source when currentTrackIndex or currentTrackList change
 	useEffect(() => {
 		audioRef.current = new Audio(audioSrc);
 
-		if (isReady) {
-			audioRef.current.play();
-			setIsPlaying(true);
-			startUpdatingSeek();
-		}
+		audioRef.current.play();
+		setIsPlaying(true);
+		startUpdatingSeek();
 
 		// stop previous playback
 		return () => audioRef.current.pause();
 
 		// stfu linter:
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [trackIndex]);
-
-	// reset footer when tracks array changes
-	useEffect(() => {
-		setTrackIndex(startingIndex);
-		audioRef.current = new Audio(audioSrc);
-
-		if (isReady) {
-			audioRef.current.play();
-			setIsPlaying(true);
-			startUpdatingSeek();
-		} else {
-			setIsReady(true);
-		}
-
-		// stop previous playback
-		return () => audioRef.current.pause();
-
-		// stfu linter:
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [tracks]);
+	}, [currentTrackIndex, currentTrackList]);
 
 	// scrubbing functionality
 	const onSeek = (value) => {
@@ -130,7 +113,7 @@ const Footer = ({ tracks, startingIndex }) => {
 		`;
 
 	return (
-		<footer>
+		<footer className={isShown ? '--shown' : ''}>
 			<div className='songsmall'>
 				<div className='songsmall__img-cntr'>
 					<img src={imageSrc} alt='song art' />
@@ -195,19 +178,10 @@ const Footer = ({ tracks, startingIndex }) => {
 	);
 };
 
-Footer.defaultProps = {
-	tracks: [
-		{
-			title: 'Detergent',
-			artist: 'Dylan Sitts',
-			album: 'Venture',
-			duration: { min: 6, sec: 5 },
-			audioSrc: '',
-			imageSrc:
-				'https://d34qmkt8w5wll9.cloudfront.net/commercial-releases/cover_art/jpeg/3730.jpg'
-		}
-	],
-	startingIndex: 0
+Footer.propTypes = {
+	currentTrackIndex: PropTypes.number,
+	setCurrentTrackIndex: PropTypes.func.isRequired,
+	currentTrackList: PropTypes.array.isRequired
 };
 
 export default Footer;

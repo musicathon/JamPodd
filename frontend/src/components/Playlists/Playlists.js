@@ -1,4 +1,5 @@
 import './Playlists.css';
+import { Link } from 'react-router-dom';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
 
@@ -47,9 +48,9 @@ const Playlists = () => {
 						</div>
 
 						<div className='plcard__info'>
-							<div className='plcard__title-cntr'>
+							<Link to='/playlist' className='plcard__title-cntr'>
 								<h2>{playlist.title}</h2>
-							</div>
+							</Link>
 
 							<div className='plcard__extra'>
 								<span className='plcard__song-count'>

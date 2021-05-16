@@ -3,7 +3,7 @@ import SongFull from '../SongFull/SongFull';
 import { AiFillPlayCircle } from 'react-icons/ai';
 import { IoShuffleOutline } from 'react-icons/io5';
 
-const PlaylistPage = ({ playlistToPlay, setStartingIndex }) => {
+const PlaylistPage = ({ setCurrentTrackIndex, currentTrackList }) => {
 	// get from backend
 	const playlist = {
 		title: 'Indie',
@@ -84,8 +84,8 @@ const PlaylistPage = ({ playlistToPlay, setStartingIndex }) => {
 						song={track}
 						key={index}
 						onPlay={() => {
-							playlistToPlay.current = playlist.tracks;
-							setStartingIndex(index);
+							currentTrackList.current = playlist.tracks;
+							setCurrentTrackIndex(index);
 						}}
 					/>
 				))}
