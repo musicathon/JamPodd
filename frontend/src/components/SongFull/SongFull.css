@@ -22,7 +22,7 @@
   padding: 4px;
 }
 .songfull__btn.--play svg {
-  fill: #ef3355;
+  fill: #df2346;
 }
 .songfull__btn.--delete {
   width: 1.5em;
@@ -45,6 +45,6 @@
   text-align: right;
 }
 .songfull__album, .songfull__duration {
-  font-size: 1.15em;
+  font-size: 1.15rem;
   font-weight: 500;
 }/*# sourceMappingURL=SongFull.css.map */

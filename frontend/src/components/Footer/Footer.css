@@ -2,6 +2,7 @@ footer {
   width: 100%;
   position: fixed;
   bottom: 0;
+  z-index: 999;
   background: #0f1626;
   padding: 1em 3em;
   display: grid;
@@ -35,7 +36,7 @@ footer.--shown {
   transform: scale(0.95);
 }
 .player__btn.--primary.--active svg {
-  fill: #ef3355;
+  fill: #df2346;
 }
 .player__btn.--secondary {
   width: 2.5em;
@@ -51,7 +52,7 @@ footer.--shown {
   transform: scale(0.97);
 }
 .player__btn.--tertiary.--active svg {
-  fill: #ef3355;
+  fill: #df2346;
 }
 .player__bar {
   min-width: 250px;

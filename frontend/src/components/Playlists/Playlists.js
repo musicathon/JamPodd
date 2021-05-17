@@ -1,13 +1,37 @@
 import './Playlists.css';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { BiDotsHorizontalRounded } from 'react-icons/bi';
+import { MdModeEdit } from 'react-icons/md';
 import { IoMdAdd } from 'react-icons/io';
+import { AiFillDelete } from 'react-icons/ai';
+import { IoClose } from 'react-icons/io5';
 
 const Playlists = () => {
 	// transition on mount
-	const [isShown, setIsShown] = useState(false);
-	useEffect(() => setTimeout(() => setIsShown(true), 25), []);
+	const [isMainShown, setIsMainShown] = useState(false);
+	useEffect(() => setTimeout(() => setIsMainShown(true), 25), []);
+
+	const [formPlName, setFormPlName] = useState('');
+	const [formPlImgSrc, setFormPlImgSrc] = useState('');
+
+	const [showPlForm, setShowPlForm] = useState(false);
+
+	// create new playlist
+	const create = () => {
+		setFormPlName('');
+		setFormPlImgSrc('');
+		setIsEditing(false);
+		setShowPlForm(true);
+	};
+
+	// edit existing playlist
+	const [isEditing, setIsEditing] = useState(false);
+	const edit = (plId) => {
+		setFormPlName(playlists[plId].title);
+		setFormPlImgSrc(playlists[plId].imgSrc);
+		setIsEditing(true);
+		setShowPlForm(true);
+	};
 
 	// get from backend
 	const playlists = [
@@ -39,37 +63,93 @@ const Playlists = () => {
 	];
 
 	return (
-		<main className={`playlists__main ${isShown ? '--shown' : ''}`}>
-			<h4>Playlists</h4>
+		<>
+			<form action='' className={`plform ${showPlForm ? '--shown' : ''}`}>
+				<h2>{isEditing ? 'Edit' : 'Create a'} Playlist</h2>
+				<div className='plform__cntr'>
+					<label htmlFor='name'>Playlist Name</label>
+					<input
+						type='text'
+						name='name'
+						id='name'
+						maxLength='24'
+						placeholder='Enter Name'
+						required
+						value={formPlName}
+						onChange={(e) => setFormPlName(e.target.value)}
+					/>
+				</div>
+				<div className='plform__cntr'>
+					<label htmlFor='imgsrc'>Image URL</label>
+					<input
+						type='url'
+						name='imgsrc'
+						id='imgsrc'
+						placeholder='Leave empty for random img'
+						value={formPlImgSrc}
+						onChange={(e) => setFormPlImgSrc(e.target.value)}
+					/>
+				</div>
+				<div className='plform__cntr --row'>
+					{isEditing && (
+						<button className='btn --delete'>
+							<AiFillDelete />
+							<span>Delete</span>
+						</button>
+					)}
+					<button
+						type='button'
+						className='btn --cancel'
+						onClick={() => setShowPlForm(false)}
+					>
+						<IoClose />
+						<span>Cancel</span>
+					</button>
+					<button type='button' className='btn --submit'>
+						<IoMdAdd />
+						<span>Create</span>
+					</button>
+				</div>
+			</form>
 
-			<div className='playlists__list'>
-				<button className='plcard addpl'>
-					<IoMdAdd />
-				</button>
-				{playlists.map((playlist, index) => (
-					<article className='plcard' key={index}>
-						<div className='plcard__img-cntr'>
-							<img src={playlist.imgSrc} alt='playlist art' />
-						</div>
+			<main
+				className={`playlists__main ${isMainShown ? '--shown' : ''}
+				${showPlForm ? '--blur' : ''}`}
+			>
+				<h4>Playlists</h4>
 
-						<div className='plcard__info'>
-							<Link to='/playlist' className='plcard__title-cntr'>
-								<h2>{playlist.title}</h2>
-							</Link>
-
-							<div className='plcard__extra'>
-								<span className='plcard__song-count'>
-									{playlist.songCount} Songs
-								</span>
-								<button className='plcard__btn'>
-									<BiDotsHorizontalRounded />
-								</button>
+				<div className='playlists__list'>
+					<button className='plcard addplcard' onClick={create}>
+						<IoMdAdd />
+					</button>
+					{playlists.map((playlist, index) => (
+						<article className='plcard' key={index}>
+							<div className='plcard__img-cntr'>
+								<img src={playlist.imgSrc} alt='playlist art' />
 							</div>
-						</div>
-					</article>
-				))}
-			</div>
-		</main>
+
+							<div className='plcard__info'>
+								<Link to='/playlist' className='plcard__title-cntr'>
+									<h2>{playlist.title}</h2>
+								</Link>
+
+								<div className='plcard__extra'>
+									<span className='plcard__song-count'>
+										{playlist.songCount} Songs
+									</span>
+									<button
+										className='plcard__btn'
+										onClick={() => edit(index)}
+									>
+										<MdModeEdit />
+									</button>
+								</div>
+							</div>
+						</article>
+					))}
+				</div>
+			</main>
+		</>
 	);
 };
 

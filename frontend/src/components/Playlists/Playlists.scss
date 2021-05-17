@@ -5,6 +5,10 @@
 		display: flex;
 		flex-flow: column;
 		gap: 1em;
+
+		&.--blur {
+			filter: blur(5px);
+		}
 	}
 
 	&__list {
@@ -14,12 +18,61 @@
 	}
 }
 
-.addpl {
+.addplcard {
 	border: common.$primary 2px dashed;
 	padding: 25%;
 
 	svg {
 		color: common.$primary;
+	}
+}
+
+.plform {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 999;
+
+	width: 40em;
+	display: flex;
+	flex-flow: column;
+	gap: 2em;
+
+	background: common.$bg-darker;
+	padding: 2em;
+	border-radius: 10px;
+
+	transition: transform 150ms ease-out, opacity 150ms ease-out;
+	transform: scale(0.95) translate(-52.5%, -52.5%);
+	opacity: 0;
+	z-index: -1;
+
+	&.--shown {
+		transform: scale(1) translate(-50%, -50%);
+		opacity: 1;
+		z-index: 999;
+	}
+
+	&__cntr {
+		display: flex;
+		flex-flow: column;
+		gap: 1em;
+
+		&.--row {
+			flex-flow: row;
+			justify-content: space-between;
+		}
+	}
+
+	label {
+		font-weight: 500;
+		font-size: 1.1rem;
+	}
+
+	input {
+		border-bottom: 1px solid common.$text-light;
+		padding: 0.25em 0;
+		font-size: 1.2rem;
 	}
 }
 
@@ -60,10 +113,10 @@
 
 	&__song-count {
 		font-weight: 500;
-		font-size: 1.125em;
+		font-size: 1.125rem;
 	}
 
 	&__btn {
-		width: 2em;
+		width: 1.25em;
 	}
 }

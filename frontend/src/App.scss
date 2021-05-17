@@ -29,6 +29,7 @@ button {
 	font: inherit;
 	outline: none;
 	border: none;
+	cursor: pointer;
 }
 
 a {
@@ -39,6 +40,16 @@ a {
 
 ul {
 	list-style: none;
+}
+
+input[type='text'],
+input[type='url'] {
+	background: inherit;
+	font: inherit;
+	color: inherit;
+	border: 0;
+	display: block;
+	outline: 0;
 }
 
 input[type='range'] {
@@ -57,6 +68,7 @@ body {
 	font-family: Cabin, sans-serif;
 	color: common.$text-light;
 	background: common.$bg-dark;
+	overflow-y: scroll;
 }
 
 main {
@@ -73,18 +85,18 @@ main {
 }
 
 h1 {
-	font-size: 2.5em;
+	font-size: 2.5rem;
 	font-weight: 700;
 }
 
 h2 {
 	font-weight: 600;
-	font-size: 1.5em;
+	font-size: 1.5rem;
 }
 
 h4 {
 	font-weight: 500;
-	font-size: 1.125em;
+	font-size: 1.125rem;
 	text-transform: uppercase;
 	color: common.$primary;
 }
@@ -114,7 +126,7 @@ svg {
 	}
 
 	span {
-		font-size: 1.25em;
+		font-size: 1.25rem;
 		font-weight: 600;
 	}
 
@@ -129,6 +141,33 @@ svg {
 	&__icon-cntr {
 		height: 1.5em;
 		width: 1.5em;
+	}
+}
+
+.btn {
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+	padding: 0.25em 0.5em;
+	border-radius: 10px;
+
+	font-size: 1.2rem;
+
+	svg {
+		width: 1.25em;
+	}
+
+	&.--submit {
+		// background: #369133;
+		background: common.$primary;
+	}
+
+	&.--cancel {
+		background: common.$faded;
+	}
+
+	&.--delete {
+		background: common.$danger;
 	}
 }
 
@@ -153,11 +192,11 @@ svg {
 
 	&__name {
 		font-weight: 500;
-		font-size: 1.25em;
+		font-size: 1.25rem;
 	}
 
 	&__artist {
 		font-weight: 400;
-		font-size: 0.9375em;
+		font-size: 0.9375rem;
 	}
 }

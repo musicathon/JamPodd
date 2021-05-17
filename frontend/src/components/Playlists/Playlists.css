@@ -3,18 +3,62 @@
   flex-flow: column;
   gap: 1em;
 }
+.playlists__main.--blur {
+  filter: blur(5px);
+}
 .playlists__list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(16em, 1fr));
   gap: 2em;
 }
 
-.addpl {
-  border: #ef3355 2px dashed;
+.addplcard {
+  border: #df2346 2px dashed;
   padding: 25%;
 }
-.addpl svg {
-  color: #ef3355;
+.addplcard svg {
+  color: #df2346;
+}
+
+.plform {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 999;
+  width: 40em;
+  display: flex;
+  flex-flow: column;
+  gap: 2em;
+  background: #0f1626;
+  padding: 2em;
+  border-radius: 10px;
+  transition: transform 150ms ease-out, opacity 150ms ease-out;
+  transform: scale(0.95) translate(-52.5%, -52.5%);
+  opacity: 0;
+  z-index: -1;
+}
+.plform.--shown {
+  transform: scale(1) translate(-50%, -50%);
+  opacity: 1;
+  z-index: 999;
+}
+.plform__cntr {
+  display: flex;
+  flex-flow: column;
+  gap: 1em;
+}
+.plform__cntr.--row {
+  flex-flow: row;
+  justify-content: space-between;
+}
+.plform label {
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+.plform input {
+  border-bottom: 1px solid #d3d3d3;
+  padding: 0.25em 0;
+  font-size: 1.2rem;
 }
 
 .plcard {
@@ -49,8 +93,8 @@
 }
 .plcard__song-count {
   font-weight: 500;
-  font-size: 1.125em;
+  font-size: 1.125rem;
 }
 .plcard__btn {
-  width: 2em;
+  width: 1.25em;
 }/*# sourceMappingURL=Playlists.css.map */

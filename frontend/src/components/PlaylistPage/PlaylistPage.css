@@ -26,7 +26,7 @@
   align-items: center;
 }
 .plinfo__song-count {
-  font-size: 1.25em;
+  font-size: 1.25rem;
   font-weight: 500;
 }
 .plinfo__btns {
@@ -44,7 +44,7 @@
   width: 3.25em;
 }
 .plinfo__btn.--play svg {
-  fill: #ef3355;
+  fill: #df2346;
 }
 .plinfo__btn.--shuffle {
   width: 2.65em;

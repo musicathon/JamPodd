@@ -20,7 +20,7 @@ header.--shown {
 }
 .logo__title {
   font-weight: 700;
-  font-size: 1.5em;
+  font-size: 1.5rem;
 }
 
 .nav ul {
@@ -29,16 +29,16 @@ header.--shown {
 }
 .nav a {
   font-weight: 600;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   display: flex;
   align-items: center;
   gap: 0.5em;
 }
 .nav a.--active {
-  color: #ef3355;
+  color: #df2346;
 }
 .nav a.--active svg {
-  fill: #ef3355;
+  fill: #df2346;
 }
 .nav__icon-cntr {
   width: 1em;
