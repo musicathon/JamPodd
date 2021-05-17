@@ -8,13 +8,13 @@ import { refreshTokenSetup } from '../../utils/refreshToken';
 
 const clientId = process.env.REACT_APP_GOOGLE_OAUTH_ID;
 
-function LoginPage({ setIsAuth }) {
+function LoginPage({ setGAuthRef }) {
 	// transition on mount
 	const [isShown, setIsShown] = useState(false);
 	useEffect(() => setTimeout(() => setIsShown(true), 25), []);
 
 	const onSuccess = (res) => {
-		setIsAuth(true);
+		setGAuthRef(res);
 		refreshTokenSetup(res);
 	};
 
@@ -36,8 +36,8 @@ function LoginPage({ setIsAuth }) {
 				<div className='login__img-cntr'>
 					<img src='/logo-dark.png' alt='jampodd logo' />
 				</div>
-				<button onClick={signIn} className='login__btn'>
-					<div className='login__icon-cntr'>
+				<button onClick={signIn} className='gbtn --login'>
+					<div className='gbtn__icon-cntr'>
 						<AiOutlineGoogle />
 					</div>
 					<span>BITS Mail</span>

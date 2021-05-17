@@ -36,28 +36,12 @@
 		width: 14em;
 	}
 
-	&__btn {
-		cursor: pointer;
-		background: common.$primary;
-		padding: 0.5em 1em;
-		border-radius: 8px;
+	.gbtn.--login {
+		font-size: 1.4rem;
 
-		display: flex;
-		align-items: center;
-		gap: 1.25em;
-
-		span {
-			font-size: 1.75em;
-			font-weight: 600;
-			color: common.$bg-darker;
+		&__icon-cntr {
+			height: 1.75em;
+			width: 1.75em;
 		}
-
-		svg {
-			fill: common.$bg-darker;
-		}
-	}
-
-	&__icon-cntr {
-		width: 2.75em;
 	}
 }

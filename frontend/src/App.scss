@@ -93,6 +93,45 @@ svg {
 	fill: common.$text-light;
 }
 
+.gbtn {
+	cursor: pointer;
+	padding: 0.25em 0.5em;
+	border-radius: 8px;
+
+	display: flex;
+	align-items: center;
+	gap: 0.75em;
+
+	transition: background 150ms ease, color 150ms ease;
+	&.--logout:hover {
+		background: common.$primary;
+		color: common.$bg-darker;
+	}
+
+	&.--login {
+		background: common.$primary;
+		color: common.$bg-darker;
+	}
+
+	span {
+		font-size: 1.25em;
+		font-weight: 600;
+	}
+
+	svg {
+		fill: common.$bg-darker;
+	}
+
+	img {
+		border-radius: 10px;
+	}
+
+	&__icon-cntr {
+		height: 1.5em;
+		width: 1.5em;
+	}
+}
+
 .songsmall {
 	justify-self: start;
 	display: flex;

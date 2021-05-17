@@ -89,6 +89,38 @@ svg {
   fill: #d3d3d3;
 }
 
+.gbtn {
+  cursor: pointer;
+  padding: 0.25em 0.5em;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  transition: background 150ms ease, color 150ms ease;
+}
+.gbtn.--logout:hover {
+  background: #ef3355;
+  color: #0f1626;
+}
+.gbtn.--login {
+  background: #ef3355;
+  color: #0f1626;
+}
+.gbtn span {
+  font-size: 1.25em;
+  font-weight: 600;
+}
+.gbtn svg {
+  fill: #0f1626;
+}
+.gbtn img {
+  border-radius: 10px;
+}
+.gbtn__icon-cntr {
+  height: 1.5em;
+  width: 1.5em;
+}
+
 .songsmall {
   justify-self: start;
   display: flex;

@@ -29,23 +29,10 @@
 .login__img-cntr {
   width: 14em;
 }
-.login__btn {
-  cursor: pointer;
-  background: #ef3355;
-  padding: 0.5em 1em;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  gap: 1.25em;
+.login .gbtn.--login {
+  font-size: 1.4rem;
 }
-.login__btn span {
-  font-size: 1.75em;
-  font-weight: 600;
-  color: #0f1626;
-}
-.login__btn svg {
-  fill: #0f1626;
-}
-.login__icon-cntr {
-  width: 2.75em;
+.login .gbtn.--login__icon-cntr {
+  height: 1.75em;
+  width: 1.75em;
 }/*# sourceMappingURL=LoginPage.css.map */

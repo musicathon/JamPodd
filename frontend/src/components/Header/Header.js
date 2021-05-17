@@ -7,7 +7,7 @@ import LogoutButton from '../LogoutButton/LogoutButton';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { IoAlbums } from 'react-icons/io5';
 
-const Header = ({ setIsAuth }) => {
+const Header = ({ setGAuthRef, DPSrc }) => {
 	// transition on mount
 	const [isShown, setIsShown] = useState(false);
 	useEffect(() => setTimeout(() => setIsShown(true), 25), []);
@@ -39,9 +39,8 @@ const Header = ({ setIsAuth }) => {
 				</ul>
 			</nav>
 
-			{/* temp */}
 			<div className='logout'>
-				<LogoutButton setIsAuth={setIsAuth} />
+				<LogoutButton setGAuthRef={setGAuthRef} DPSrc={DPSrc} />
 			</div>
 		</header>
 	);

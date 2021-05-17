@@ -10,7 +10,7 @@ import Playlists from './components/Playlists/Playlists';
 import PlayListPage from './components/PlaylistPage/PlaylistPage';
 
 function App() {
-	const [isAuth, setIsAuth] = useState(false);
+	const [gAuthRef, setGAuthRef] = useState();
 	const [currentTrackIndex, setCurrentTrackIndex] = useState();
 	const currentTrackList = useRef();
 
@@ -20,16 +20,19 @@ function App() {
 			setCurrentTrackIndex(undefined);
 			currentTrackList.current = undefined;
 		};
-	}, [isAuth]);
+	}, [gAuthRef]);
 
 	return (
 		<Switch>
-			<ConditionalRoute condition={!isAuth} exact path='/login' redirectPath='/'>
-				<LoginPage setIsAuth={setIsAuth} />
+			<ConditionalRoute condition={!gAuthRef} exact path='/login' redirectPath='/'>
+				<LoginPage setGAuthRef={setGAuthRef} />
 			</ConditionalRoute>
 
-			<ConditionalRoute condition={isAuth} path='/' redirectPath='/login'>
-				<Header setIsAuth={setIsAuth} />
+			<ConditionalRoute condition={!!gAuthRef} path='/' redirectPath='/login'>
+				<Header
+					setGAuthRef={setGAuthRef}
+					DPSrc={gAuthRef ? gAuthRef.profileObj.imageUrl : ''}
+				/>
 				<Switch>
 					{/* redirect '/' to '/playlists' */}
 					<ConditionalRoute
@@ -39,7 +42,7 @@ function App() {
 						redirectPath='/playlists'
 					/>
 					<ConditionalRoute
-						condition={isAuth}
+						condition={!!gAuthRef}
 						exact
 						path='/explore'
 						redirectPath='/login'
@@ -47,7 +50,7 @@ function App() {
 						<Explore />
 					</ConditionalRoute>
 					<ConditionalRoute
-						condition={isAuth}
+						condition={!!gAuthRef}
 						exact
 						path='/playlists'
 						redirectPath='/login'
@@ -55,7 +58,7 @@ function App() {
 						<Playlists />
 					</ConditionalRoute>
 					<ConditionalRoute
-						condition={isAuth}
+						condition={!!gAuthRef}
 						path='/playlist'
 						redirectPath='/login'
 					>
