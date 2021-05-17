@@ -7,10 +7,9 @@ const clientId = process.env.REACT_APP_GOOGLE_OAUTH_ID;
 function LogoutButton({ setIsAuth }) {
 	const onLogoutSuccess = (res) => {
 		setIsAuth(false);
-		console.log('Logged out Success');
 	};
 
-	const onFailure = () => console.log('Handle failure cases');
+	const onFailure = () => console.log('Logout Failed');
 
 	const { signOut } = useGoogleLogout({
 		clientId,

@@ -11,16 +11,10 @@ const clientId = process.env.REACT_APP_GOOGLE_OAUTH_ID;
 function LoginPage({ setIsAuth }) {
 	// transition on mount
 	const [isShown, setIsShown] = useState(false);
-	useEffect(() => {
-		setIsShown(true);
-
-		return () => setIsShown(false);
-	}, []);
+	useEffect(() => setTimeout(() => setIsShown(true), 25), []);
 
 	const onSuccess = (res) => {
 		setIsAuth(true);
-		console.log('Login Success: currentUser:', res.profileObj);
-
 		refreshTokenSetup(res);
 	};
 

@@ -25,7 +25,7 @@
 			border: 1px solid adjust-color($color: common.$faded, $alpha: 0.3);
 		}
 
-		transform: translateY(-100%);
+		transform: translateY(-90vh);
 		transition: transform 300ms cubic-bezier(0.34, 0.68, 0.43, 0.91);
 		&.--shown {
 			transform: translateY(0);

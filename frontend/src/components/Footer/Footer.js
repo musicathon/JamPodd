@@ -1,4 +1,4 @@
-// TODO: Add shuffle, and repeat, duration
+// TODO: Add shuffle, duration
 
 import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
@@ -10,12 +10,13 @@ import { IoShuffleOutline, IoRepeatOutline, IoVolumeMedium } from 'react-icons/i
 const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) => {
 	// animate on mount
 	const [isShown, setIsShown] = useState(false);
-	useEffect(() => setIsShown(true), []);
+	useEffect(() => setInterval(setIsShown(true), 25), []);
 
 	const [trackProgress, setTrackProgress] = useState(0); // stores track progress in seconds
-	const [volume, setVolume] = useState(1); // stores volume
+	const [volume, setVolume] = useState(0.75); // stores volume
 	const [isPlaying, setIsPlaying] = useState(false); // play/pause state
-	// const [isReady, setIsReady] = useState(false); // simply prevents playback on page load
+	const [doShuffle, setDoShuffle] = useState(false); // shuffle state
+	const [doRepeat, setDoRepeat] = useState(false); // repeat state. when true, repeats the same track
 
 	const { title, artist, audioSrc, imageSrc } = currentTrackList[currentTrackIndex]; // get current track info
 
@@ -33,7 +34,7 @@ const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) =
 		intervalRef.current = setInterval(() => {
 			if (audioRef.current.ended) toNextTrack();
 			else setTrackProgress(audioRef.current.currentTime);
-		}, [1000]);
+		}, [500]);
 	};
 
 	// pause/play song
@@ -52,14 +53,24 @@ const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) =
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isPlaying]);
 
+	const toggleRepeat = () => setDoRepeat(!doRepeat);
+
 	// change tracks
 	const toPrevTrack = () => {
-		if (currentTrackIndex === 0) setCurrentTrackIndex(currentTrackList.length - 1);
+		if (trackProgress > 5 || doRepeat) {
+			audioRef.current.currentTime = 0;
+			audioRef.current.play();
+		} else if (currentTrackIndex === 0)
+			setCurrentTrackIndex(currentTrackList.length - 1);
 		else setCurrentTrackIndex(currentTrackIndex - 1);
 	};
 
 	const toNextTrack = () => {
-		if (currentTrackIndex === currentTrackList.length - 1) setCurrentTrackIndex(0);
+		if (doRepeat) {
+			audioRef.current.currentTime = 0;
+			audioRef.current.play();
+		} else if (currentTrackIndex === currentTrackList.length - 1)
+			setCurrentTrackIndex(0);
 		else setCurrentTrackIndex(currentTrackIndex + 1);
 	};
 
@@ -126,7 +137,12 @@ const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) =
 
 			<div className='player'>
 				<div className='player__btns'>
-					<button className='player__btn --tertiary'>
+					<button
+						className={`player__btn --tertiary  ${
+							doRepeat ? '--active' : ''
+						}`}
+						onClick={toggleRepeat}
+					>
 						<IoRepeatOutline />
 					</button>
 					<button className='player__btn --secondary' onClick={toPrevTrack}>
@@ -141,7 +157,7 @@ const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) =
 					<button className='player__btn --secondary' onClick={toNextTrack}>
 						<BiSkipNext />
 					</button>
-					<button className='player__btn --tertiary'>
+					<button className={`player__btn --tertiary`}>
 						<IoShuffleOutline />
 					</button>
 				</div>

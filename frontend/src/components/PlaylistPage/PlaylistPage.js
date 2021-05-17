@@ -1,9 +1,14 @@
 import './PlaylistPage.css';
+import { useState, useEffect } from 'react';
 import SongFull from '../SongFull/SongFull';
 import { AiFillPlayCircle } from 'react-icons/ai';
 import { IoShuffleOutline } from 'react-icons/io5';
 
 const PlaylistPage = ({ setCurrentTrackIndex, currentTrackList }) => {
+	// transition on mount
+	const [isShown, setIsShown] = useState(false);
+	useEffect(() => setTimeout(() => setIsShown(true), 25), []);
+
 	// get from backend
 	const playlist = {
 		title: 'Indie',
@@ -56,7 +61,7 @@ const PlaylistPage = ({ setCurrentTrackIndex, currentTrackList }) => {
 	};
 
 	return (
-		<main className='plpage__main'>
+		<main className={`plpage__main ${isShown ? '--shown' : ''}`}>
 			<div className=' plinfo'>
 				<h4>Playlist</h4>
 

@@ -1,9 +1,14 @@
 import './Playlists.css';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
 
 const Playlists = () => {
+	// transition on mount
+	const [isShown, setIsShown] = useState(false);
+	useEffect(() => setTimeout(() => setIsShown(true), 25), []);
+
 	// get from backend
 	const playlists = [
 		{
@@ -34,7 +39,7 @@ const Playlists = () => {
 	];
 
 	return (
-		<main className='playlists__main'>
+		<main className={`playlists__main ${isShown ? '--shown' : ''}`}>
 			<h4>Playlists</h4>
 
 			<div className='playlists__list'>

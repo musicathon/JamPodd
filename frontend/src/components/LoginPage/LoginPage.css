@@ -14,7 +14,7 @@
   border-radius: 16px;
   padding: 3em 5em;
   position: relative;
-  transform: translateY(-100%);
+  transform: translateY(-90vh);
   transition: transform 300ms cubic-bezier(0.34, 0.68, 0.43, 0.91);
 }
 .login__cntr::after {
