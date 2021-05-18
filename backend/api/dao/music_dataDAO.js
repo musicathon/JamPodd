@@ -23,11 +23,13 @@ export default class musicDAO {
   } = {}) {
     let query
     if (filters) {
-      if ("title" in filters) {
-        query = { $text: { $search: filters["title"] } }
+      if ("keyword" in filters) {
+        query = {$text: { $search: filters["keyword"] } }
       } else if ("artist" in filters) {
-        query = { "artist": { $eq: filters["artist"] } }
-      } 
+        query = {"artist": { $eq: filters["artist"] } }
+      } else if ("title" in filters) {
+          query = {"title": { $eq: filters["title"] } }
+      }
     }
 
     let cursor

@@ -10,7 +10,9 @@ export default class MusicController {
       filters.title = req.query.title
     } else if (req.query.artist) {
       filters.artist = req.query.artist
-    } 
+    } else if (req.query.keyword){
+        filters.keyword = req.query.keyword
+    }
 
     const { songsList, totalNumSongs } = await MusicDAO.getSongs({
       filters,
