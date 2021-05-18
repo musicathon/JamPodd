@@ -66,6 +66,7 @@ const Playlists = () => {
 		<>
 			<form action='' className={`plform ${showPlForm ? '--shown' : ''}`}>
 				<h2>{isEditing ? 'Edit' : 'Create a'} Playlist</h2>
+
 				<div className='plform__cntr'>
 					<label htmlFor='name'>Playlist Name</label>
 					<input
@@ -79,6 +80,7 @@ const Playlists = () => {
 						onChange={(e) => setFormPlName(e.target.value)}
 					/>
 				</div>
+
 				<div className='plform__cntr'>
 					<label htmlFor='imgsrc'>Image URL</label>
 					<input
@@ -90,6 +92,7 @@ const Playlists = () => {
 						onChange={(e) => setFormPlImgSrc(e.target.value)}
 					/>
 				</div>
+
 				<div className='plform__cntr --row'>
 					{isEditing && (
 						<button className='btn --delete'>
@@ -97,6 +100,7 @@ const Playlists = () => {
 							<span>Delete</span>
 						</button>
 					)}
+
 					<button
 						type='button'
 						className='btn --cancel'
@@ -105,6 +109,7 @@ const Playlists = () => {
 						<IoClose />
 						<span>Cancel</span>
 					</button>
+
 					<button type='button' className='btn --submit'>
 						<IoMdAdd />
 						<span>Create</span>
@@ -122,6 +127,7 @@ const Playlists = () => {
 					<button className='plcard addplcard' onClick={create}>
 						<IoMdAdd />
 					</button>
+
 					{playlists.map((playlist, index) => (
 						<article className='plcard' key={index}>
 							<div className='plcard__img-cntr'>
@@ -137,6 +143,7 @@ const Playlists = () => {
 									<span className='plcard__song-count'>
 										{playlist.songCount} Songs
 									</span>
+
 									<button
 										className='plcard__btn'
 										onClick={() => edit(index)}

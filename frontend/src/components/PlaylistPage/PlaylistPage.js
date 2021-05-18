@@ -1,13 +1,17 @@
 import './PlaylistPage.css';
 import { useState, useEffect } from 'react';
-import SongFull from '../SongFull/SongFull';
-import { AiFillPlayCircle } from 'react-icons/ai';
-import { IoShuffleOutline } from 'react-icons/io5';
+import { AiFillPlayCircle, AiFillDelete } from 'react-icons/ai';
+import { IoShuffleOutline, IoPlay } from 'react-icons/io5';
 
 const PlaylistPage = ({ setCurrentTrackIndex, currentTrackList }) => {
 	// transition on mount
 	const [isShown, setIsShown] = useState(false);
 	useEffect(() => setTimeout(() => setIsShown(true), 25), []);
+
+	const onPlay = (index) => {
+		currentTrackList.current = playlist.tracks;
+		setCurrentTrackIndex(index);
+	};
 
 	// get from backend
 	const playlist = {
@@ -83,16 +87,42 @@ const PlaylistPage = ({ setCurrentTrackIndex, currentTrackList }) => {
 					</div>
 				</div>
 			</div>
+
 			<div className='songlist'>
 				{playlist.tracks.map((track, index) => (
-					<SongFull
-						song={track}
-						key={index}
-						onPlay={() => {
-							currentTrackList.current = playlist.tracks;
-							setCurrentTrackIndex(index);
-						}}
-					/>
+					<div className={`songfull`} key={index}>
+						<div className='songfull__cntr songsmall'>
+							<div className='songsmall__img-cntr'>
+								<img src={track.imageSrc} alt='song art' />
+								<button
+									className='songfull__btn --play'
+									onClick={() => onPlay(index)}
+								>
+									<IoPlay />
+								</button>
+							</div>
+
+							<div className='songsmall__info'>
+								<span className='songsmall__name'>{track.title}</span>
+								<span className='songsmall__artist'>{track.artist}</span>
+							</div>
+						</div>
+
+						<span className='songfull__cntr songfull__album'>
+							{track.album}
+						</span>
+
+						<div className='songfull__cntr --fixed-width'>
+							<button className='songfull__btn --delete'>
+								<AiFillDelete />
+							</button>
+
+							<span className='songfull__duration'>
+								{track.duration.min}:
+								{track.duration.sec.toString().padStart(2, '0')}
+							</span>
+						</div>
+					</div>
 				))}
 			</div>
 		</main>

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* ========
 	Resets
 	======= */
@@ -29,6 +30,10 @@ button {
   border: none;
   cursor: pointer;
 }
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
 
 a {
   color: inherit;
@@ -47,7 +52,12 @@ input[type=url] {
   color: inherit;
   border: 0;
   display: block;
-  outline: 0;
+}
+
+input[type=checkbox] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 
 input[type=range] {
@@ -94,7 +104,7 @@ h4 {
   font-weight: 500;
   font-size: 1.125rem;
   text-transform: uppercase;
-  color: #df2346;
+  color: #df235b;
 }
 
 svg {
@@ -111,11 +121,11 @@ svg {
   transition: background 150ms ease, color 150ms ease;
 }
 .gbtn.--logout:hover {
-  background: #df2346;
+  background: #df235b;
   color: #0f1626;
 }
 .gbtn.--login {
-  background: #df2346;
+  background: #df235b;
   color: #0f1626;
 }
 .gbtn span {
@@ -145,13 +155,16 @@ svg {
   width: 1.25em;
 }
 .btn.--submit {
-  background: #df2346;
+  background: #df235b;
 }
 .btn.--cancel {
   background: rgba(218, 218, 218, 0.2);
 }
 .btn.--delete {
   background: #a72117;
+}
+.btn:disabled {
+  filter: brightness(60%) grayscale(40%);
 }
 
 .songsmall {
@@ -177,4 +190,72 @@ svg {
 .songsmall__artist {
   font-weight: 400;
   font-size: 0.9375rem;
+}
+
+.songfull {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 0.75em;
+  border-radius: 10px;
+  transition: background 50ms ease-out;
+}
+.songfull .songsmall__img-cntr {
+  position: relative;
+  z-index: 1;
+}
+.songfull__cntr:not(:last-child) {
+  margin-right: 2em;
+  flex: 200px 1 1;
+}
+.songfull__cntr.--fixed-width {
+  width: 4em;
+  text-align: right;
+}
+.songfull__album, .songfull__duration {
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+.songfull__btn.--play, .songfull__btn.--delete {
+  display: none;
+}
+.songfull__btn.--play {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+}
+.songfull__btn.--play svg {
+  fill: #df235b;
+}
+.songfull__btn.--delete {
+  width: 1.5em;
+}
+.songfull__checkbox {
+  background-color: rgba(218, 218, 218, 0.2);
+  padding: 10px;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+}
+.songfull__checkbox:checked {
+  background-color: #df235b;
+}
+.songfull__checkbox:checked::after {
+  content: "✔";
+  font-size: 14px;
+  position: absolute;
+  top: 0;
+  left: 5px;
+  color: #0f1626;
+}
+.songfull:hover {
+  background: rgba(218, 218, 218, 0.2);
+}
+.songfull:hover .songfull__btn.--play, .songfull:hover .songfull__btn.--delete {
+  display: initial;
+}
+.songfull:hover .songfull__duration {
+  display: none;
 }/*# sourceMappingURL=App.css.map */

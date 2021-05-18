@@ -1,0 +1,58 @@
+@use '../../common';
+
+.explore__main {
+	display: flex;
+	flex-flow: column;
+	gap: 2em;
+}
+
+h4 {
+	margin-bottom: -1em;
+}
+
+.search {
+	display: flex;
+	justify-content: space-between;
+	align-items: stretch;
+	height: 3.25em;
+	background: common.$bg-darker;
+	border-radius: 8px;
+	overflow: hidden;
+
+	input {
+		flex: 1;
+		padding: 0 1em;
+		font-size: 1.3rem;
+	}
+
+	button {
+		flex: 8em 0;
+		padding: 0.5em;
+		background: common.$primary;
+
+		svg {
+			fill: common.$bg-darker;
+		}
+	}
+}
+
+.addtopl {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	&__prompt {
+		font-size: 1.2em;
+		color: change-color(common.$text-light, $alpha: 0.5);
+	}
+
+	.btn {
+		padding: 0.3em 0.75em;
+	}
+}
+
+.results {
+	display: flex;
+	flex-flow: column;
+	gap: 0.5em;
+}

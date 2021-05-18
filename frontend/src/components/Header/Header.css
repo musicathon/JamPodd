@@ -35,10 +35,10 @@ header.--shown {
   gap: 0.5em;
 }
 .nav a.--active {
-  color: #df2346;
+  color: #df235b;
 }
 .nav a.--active svg {
-  fill: #df2346;
+  fill: #df235b;
 }
 .nav__icon-cntr {
   width: 1em;

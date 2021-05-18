@@ -1,2 +1,51 @@
+.explore__main {
+  display: flex;
+  flex-flow: column;
+  gap: 2em;
+}
 
-/*# sourceMappingURL=Explore.css.map *//*# sourceMappingURL=Explore.css.map */
+h4 {
+  margin-bottom: -1em;
+}
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  height: 3.25em;
+  background: #0f1626;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.search input {
+  flex: 1;
+  padding: 0 1em;
+  font-size: 1.3rem;
+}
+.search button {
+  flex: 8em 0;
+  padding: 0.5em;
+  background: #df235b;
+}
+.search button svg {
+  fill: #0f1626;
+}
+
+.addtopl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.addtopl__prompt {
+  font-size: 1.2em;
+  color: rgba(211, 211, 211, 0.5);
+}
+.addtopl .btn {
+  padding: 0.3em 0.75em;
+}
+
+.results {
+  display: flex;
+  flex-flow: column;
+  gap: 0.5em;
+}/*# sourceMappingURL=Explore.css.map */

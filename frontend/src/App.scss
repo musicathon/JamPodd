@@ -29,7 +29,12 @@ button {
 	font: inherit;
 	outline: none;
 	border: none;
+
 	cursor: pointer;
+	&:disabled {
+		cursor: not-allowed;
+		pointer-events: none;
+	}
 }
 
 a {
@@ -49,7 +54,10 @@ input[type='url'] {
 	color: inherit;
 	border: 0;
 	display: block;
-	outline: 0;
+}
+
+input[type='checkbox'] {
+	appearance: none;
 }
 
 input[type='range'] {
@@ -169,6 +177,10 @@ svg {
 	&.--delete {
 		background: common.$danger;
 	}
+
+	&:disabled {
+		filter: brightness(60%) grayscale(40%);
+	}
 }
 
 .songsmall {
@@ -198,5 +210,96 @@ svg {
 	&__artist {
 		font-weight: 400;
 		font-size: 0.9375rem;
+	}
+}
+
+.songfull {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.5em 0.75em;
+	border-radius: 10px;
+	transition: background 50ms ease-out;
+
+	.songsmall__img-cntr {
+		position: relative;
+		z-index: 1;
+	}
+
+	&__cntr {
+		&:not(:last-child) {
+			margin-right: 2em;
+			flex: 200px 1 1;
+		}
+
+		&.--fixed-width {
+			width: 4em;
+			text-align: right;
+		}
+	}
+
+	&__album,
+	&__duration {
+		font-size: 1.15rem;
+		font-weight: 500;
+	}
+
+	&__btn {
+		&.--play,
+		&.--delete {
+			display: none;
+		}
+
+		&.--play {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			padding: 4px;
+
+			svg {
+				fill: common.$primary;
+			}
+		}
+
+		&.--delete {
+			width: 1.5em;
+		}
+	}
+
+	&__checkbox {
+		background-color: common.$faded;
+		padding: 10px;
+		border-radius: 3px;
+		position: relative;
+		cursor: pointer;
+
+		&:checked {
+			background-color: common.$primary;
+		}
+
+		&:checked::after {
+			content: '\2714';
+			font-size: 14px;
+			position: absolute;
+			top: 0;
+			left: 5px;
+			color: common.$bg-darker;
+		}
+	}
+
+	&:hover {
+		background: common.$faded;
+
+		.songfull__btn {
+			&.--play,
+			&.--delete {
+				display: initial;
+			}
+		}
+
+		.songfull__duration {
+			display: none;
+		}
 	}
 }

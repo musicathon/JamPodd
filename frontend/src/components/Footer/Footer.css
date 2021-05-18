@@ -36,7 +36,7 @@ footer.--shown {
   transform: scale(0.95);
 }
 .player__btn.--primary.--active svg {
-  fill: #df2346;
+  fill: #df235b;
 }
 .player__btn.--secondary {
   width: 2.5em;
@@ -52,7 +52,7 @@ footer.--shown {
   transform: scale(0.97);
 }
 .player__btn.--tertiary.--active svg {
-  fill: #df2346;
+  fill: #df235b;
 }
 .player__bar {
   min-width: 250px;
