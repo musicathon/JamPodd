@@ -84,10 +84,15 @@ main {
 	padding: 2em 3em 3em 3em;
 	margin-bottom: 5em;
 
-	transform: scale(0.96);
-	opacity: 0;
-	transition: transform 150ms ease-out, opacity 150ms ease-out;
-	&.--shown {
+	animation: main-mount-anim 200ms ease-out;
+}
+
+@keyframes main-mount-anim {
+	from {
+		transform: scale(0.96);
+		opacity: 0;
+	}
+	to {
 		transform: scale(1);
 		opacity: 1;
 	}
@@ -191,6 +196,7 @@ svg {
 	gap: 1em;
 
 	&__img-cntr {
+		flex-shrink: 0;
 		border-radius: 5px;
 		overflow: hidden;
 		width: 3em;
@@ -318,7 +324,7 @@ svg {
 	opacity: 0;
 	z-index: -1;
 	pointer-events: none;
-	transition: transform 150ms ease-out, opacity 150ms ease-out;
+	transition: transform 150ms ease-out, opacity 150ms ease-out, z-index 150ms ease-out;
 	&.--shown {
 		transform: scale(1) translate(-50%, -50%);
 		opacity: 1;

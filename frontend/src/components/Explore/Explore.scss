@@ -41,14 +41,16 @@
 	}
 
 	&__img-cntr {
+		flex-shrink: 0;
 		width: 4em;
 		height: 4em;
 		border-radius: 5px;
 		overflow: hidden;
 	}
 
-	span {
+	&__title {
 		font-size: 1.25em;
+		text-align: left;
 	}
 }
 

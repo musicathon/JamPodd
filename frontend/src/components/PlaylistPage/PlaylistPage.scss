@@ -19,6 +19,7 @@
 	}
 
 	&__img-cntr {
+		flex-shrink: 0;
 		height: 15em;
 		border-radius: 10px;
 		overflow: hidden;

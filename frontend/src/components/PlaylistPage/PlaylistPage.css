@@ -13,6 +13,7 @@
   margin-bottom: -0.5em;
 }
 .plinfo__img-cntr {
+  flex-shrink: 0;
   height: 15em;
   border-radius: 10px;
   overflow: hidden;

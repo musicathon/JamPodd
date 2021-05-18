@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Switch } from 'react-router-dom';
 import ConditionalRoute from './components/ConditionalRoute';
 import LoginPage from './components/LoginPage/LoginPage';
@@ -12,13 +12,13 @@ import PlayListPage from './components/PlaylistPage/PlaylistPage';
 function App() {
 	const [gAuthRef, setGAuthRef] = useState();
 	const [currentTrackIndex, setCurrentTrackIndex] = useState();
-	const currentTrackList = useRef();
+	const [currentTrackList, setCurrentTrackList] = useState([]);
 
 	// reset currentTrackIndex and currentTrackList on when footer unmounts
 	useEffect(() => {
 		return () => {
 			setCurrentTrackIndex(undefined);
-			currentTrackList.current = undefined;
+			setCurrentTrackList([]);
 		};
 	}, [gAuthRef]);
 
@@ -48,7 +48,7 @@ function App() {
 						redirectPath='/login'
 					>
 						<Explore
-							currentTrackList={currentTrackList}
+							setCurrentTrackList={setCurrentTrackList}
 							setCurrentTrackIndex={setCurrentTrackIndex}
 						/>
 					</ConditionalRoute>
@@ -66,17 +66,17 @@ function App() {
 						redirectPath='/login'
 					>
 						<PlayListPage
-							currentTrackList={currentTrackList}
+							setCurrentTrackList={setCurrentTrackList}
 							setCurrentTrackIndex={setCurrentTrackIndex}
 						/>
 					</ConditionalRoute>
 				</Switch>
 				{/* Only show Footer if a track list is playing */}
-				{currentTrackList.current && (
+				{currentTrackList.length > 0 && (
 					<Footer
 						currentTrackIndex={currentTrackIndex}
 						setCurrentTrackIndex={setCurrentTrackIndex}
-						currentTrackList={currentTrackList.current}
+						currentTrackList={currentTrackList}
 					/>
 				)}
 			</ConditionalRoute>

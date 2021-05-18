@@ -12,9 +12,14 @@ footer {
 	grid-template-columns: 1fr auto 1fr;
 	align-items: center;
 
-	transform: translateY(15vh);
-	transition: transform 200ms cubic-bezier(0.05, 0.89, 0.35, 0.95);
-	&.--shown {
+	animation: footer-mount-anim 250ms cubic-bezier(0.05, 0.89, 0.35, 0.95);
+}
+
+@keyframes footer-mount-anim {
+	from {
+		transform: translateY(15vh);
+	}
+	to {
 		transform: translateY(0em);
 	}
 }

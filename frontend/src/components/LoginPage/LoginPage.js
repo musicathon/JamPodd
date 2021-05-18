@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import './LoginPage.css';
 import { useGoogleLogin } from 'react-google-login';
 import { AiOutlineGoogle } from 'react-icons/ai';
@@ -9,10 +8,6 @@ import { refreshTokenSetup } from '../../utils/refreshToken';
 const clientId = process.env.REACT_APP_GOOGLE_OAUTH_ID;
 
 function LoginPage({ setGAuthRef }) {
-	// transition on mount
-	const [isShown, setIsShown] = useState(false);
-	useEffect(() => setTimeout(() => setIsShown(true), 25), []);
-
 	const onSuccess = (res) => {
 		setGAuthRef(res);
 		refreshTokenSetup(res);
@@ -30,7 +25,7 @@ function LoginPage({ setGAuthRef }) {
 
 	return (
 		<article className='login'>
-			<div className={`login__cntr ${isShown ? '--shown' : ''}`}>
+			<div className='login__cntr'>
 				<h1>JamPodd</h1>
 				<h1>Sign In</h1>
 				<div className='login__img-cntr'>

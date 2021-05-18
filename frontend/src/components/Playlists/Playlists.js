@@ -1,16 +1,12 @@
 import './Playlists.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MdModeEdit } from 'react-icons/md';
 import { IoMdAdd, IoMdCheckmark } from 'react-icons/io';
-import { AiFillDelete } from 'react-icons/ai';
+import { CgTrashEmpty } from 'react-icons/cg';
 import { IoClose } from 'react-icons/io5';
 
 const Playlists = () => {
-	// transition on mount
-	const [isMainShown, setIsMainShown] = useState(false);
-	useEffect(() => setTimeout(() => setIsMainShown(true), 25), []);
-
 	const [formPlName, setFormPlName] = useState('');
 	const [showPlForm, setShowPlForm] = useState(false);
 
@@ -92,7 +88,7 @@ const Playlists = () => {
 
 					{isEditing && (
 						<button type='button' className='btn --delete'>
-							<AiFillDelete />
+							<CgTrashEmpty />
 							<span>Delete</span>
 						</button>
 					)}
@@ -105,7 +101,7 @@ const Playlists = () => {
 			</form>
 
 			<main
-				className={`playlists__main popup__behind ${isMainShown ? '--shown' : ''}
+				className={`playlists__main popup__behind 
 				${showPlForm ? '--defocus' : ''}`}
 			>
 				<h4>Playlists</h4>

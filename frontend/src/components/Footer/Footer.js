@@ -8,10 +8,6 @@ import { BiSkipNext, BiSkipPrevious } from 'react-icons/bi';
 import { IoShuffleOutline, IoRepeatOutline, IoVolumeMedium } from 'react-icons/io5';
 
 const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) => {
-	// animate on mount
-	const [isShown, setIsShown] = useState(false);
-	useEffect(() => setInterval(setIsShown(true), 25), []);
-
 	const [trackProgress, setTrackProgress] = useState(0); // stores track progress in seconds
 	const [volume, setVolume] = useState(0.75); // stores volume
 	const [isPlaying, setIsPlaying] = useState(false); // play/pause state
@@ -124,7 +120,7 @@ const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) =
 		`;
 
 	return (
-		<footer className={isShown ? '--shown' : ''}>
+		<footer>
 			<div className='songsmall'>
 				<div className='songsmall__img-cntr'>
 					<img src={imageSrc} alt='song art' />

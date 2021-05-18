@@ -34,13 +34,15 @@
   background: rgba(218, 218, 218, 0.2);
 }
 .selectpl__img-cntr {
+  flex-shrink: 0;
   width: 4em;
   height: 4em;
   border-radius: 5px;
   overflow: hidden;
 }
-.selectpl span {
+.selectpl__title {
   font-size: 1.25em;
+  text-align: left;
 }
 
 .search {

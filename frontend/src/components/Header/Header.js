@@ -1,19 +1,14 @@
 // TODO: Add logout button
 
 import './Header.css';
-import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../LogoutButton/LogoutButton';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { IoAlbums } from 'react-icons/io5';
 
 const Header = ({ setGAuthRef, DPSrc }) => {
-	// transition on mount
-	const [isShown, setIsShown] = useState(false);
-	useEffect(() => setTimeout(() => setIsShown(true), 25), []);
-
 	return (
-		<header className={`${isShown ? '--shown' : ''}`}>
+		<header>
 			<div className='logo'>
 				<span className='logo__title'>JamPodd</span>
 			</div>

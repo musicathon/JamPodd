@@ -1,14 +1,10 @@
 import './Explore.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { IoMdAdd } from 'react-icons/io';
 import { IoPlay, IoClose } from 'react-icons/io5';
 
-const Explore = ({ setCurrentTrackIndex, currentTrackList }) => {
-	// transition on mount
-	const [isShown, setIsShown] = useState(false);
-	useEffect(() => setTimeout(() => setIsShown(true), 25), []);
-
+const Explore = ({ setCurrentTrackIndex, setCurrentTrackList }) => {
 	// get from backend
 	const tracks = [
 		{
@@ -106,7 +102,7 @@ const Explore = ({ setCurrentTrackIndex, currentTrackList }) => {
 	};
 
 	const onPlay = (index) => {
-		currentTrackList.current = tracks;
+		setCurrentTrackList(tracks);
 		setCurrentTrackIndex(index);
 	};
 
@@ -128,7 +124,7 @@ const Explore = ({ setCurrentTrackIndex, currentTrackList }) => {
 									<img src={playlist.imageSrc} alt='playlist art' />
 								</div>
 
-								<span>{playlist.title}</span>
+								<span className='selectpl__title'>{playlist.title}</span>
 							</button>
 						))}
 					</div>
@@ -147,9 +143,8 @@ const Explore = ({ setCurrentTrackIndex, currentTrackList }) => {
 			</div>
 
 			<main
-				className={`explore__main popup__behind ${
-					showPlSelector ? '--defocus' : ''
-				} ${isShown ? '--shown' : ''}`}
+				className={`explore__main popup__behind 
+				${showPlSelector ? '--defocus' : ''}`}
 			>
 				<h4>Explore</h4>
 

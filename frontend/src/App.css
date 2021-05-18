@@ -82,15 +82,31 @@ body {
 main {
   padding: 2em 3em 3em 3em;
   margin-bottom: 5em;
-  transform: scale(0.96);
-  opacity: 0;
-  transition: transform 150ms ease-out, opacity 150ms ease-out;
-}
-main.--shown {
-  transform: scale(1);
-  opacity: 1;
+  -webkit-animation: main-mount-anim 200ms ease-out;
+          animation: main-mount-anim 200ms ease-out;
 }
 
+@-webkit-keyframes main-mount-anim {
+  from {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes main-mount-anim {
+  from {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 h1 {
   font-size: 2.5rem;
   font-weight: 700;
@@ -174,6 +190,7 @@ svg {
   gap: 1em;
 }
 .songsmall__img-cntr {
+  flex-shrink: 0;
   border-radius: 5px;
   overflow: hidden;
   width: 3em;
@@ -272,7 +289,7 @@ svg {
   opacity: 0;
   z-index: -1;
   pointer-events: none;
-  transition: transform 150ms ease-out, opacity 150ms ease-out;
+  transition: transform 150ms ease-out, opacity 150ms ease-out, z-index 150ms ease-out;
 }
 .popup.--shown {
   transform: scale(1) translate(-50%, -50%);

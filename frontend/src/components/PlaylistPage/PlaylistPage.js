@@ -1,15 +1,11 @@
 import './PlaylistPage.css';
-import { useState, useEffect } from 'react';
-import { AiFillPlayCircle, AiFillDelete } from 'react-icons/ai';
+import { AiFillPlayCircle } from 'react-icons/ai';
+import { CgTrashEmpty } from 'react-icons/cg';
 import { IoShuffleOutline, IoPlay } from 'react-icons/io5';
 
-const PlaylistPage = ({ setCurrentTrackIndex, currentTrackList }) => {
-	// transition on mount
-	const [isShown, setIsShown] = useState(false);
-	useEffect(() => setTimeout(() => setIsShown(true), 25), []);
-
+const PlaylistPage = ({ setCurrentTrackIndex, setCurrentTrackList }) => {
 	const onPlay = (index) => {
-		currentTrackList.current = playlist.tracks;
+		setCurrentTrackList(playlist.tracks);
 		setCurrentTrackIndex(index);
 	};
 
@@ -65,7 +61,7 @@ const PlaylistPage = ({ setCurrentTrackIndex, currentTrackList }) => {
 	};
 
 	return (
-		<main className={`plpage__main ${isShown ? '--shown' : ''}`}>
+		<main className='plpage__main'>
 			<div className=' plinfo'>
 				<h4>Playlist</h4>
 
@@ -114,7 +110,7 @@ const PlaylistPage = ({ setCurrentTrackIndex, currentTrackList }) => {
 
 						<div className='songfull__cntr --fixed-width'>
 							<button className='songfull__btn --delete'>
-								<AiFillDelete />
+								<CgTrashEmpty />
 							</button>
 
 							<span className='songfull__duration'>
