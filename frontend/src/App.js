@@ -47,7 +47,10 @@ function App() {
 						path='/explore'
 						redirectPath='/login'
 					>
-						<Explore />
+						<Explore
+							currentTrackList={currentTrackList}
+							setCurrentTrackIndex={setCurrentTrackIndex}
+						/>
 					</ConditionalRoute>
 					<ConditionalRoute
 						condition={!!gAuthRef}

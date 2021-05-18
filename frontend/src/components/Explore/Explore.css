@@ -3,9 +3,44 @@
   flex-flow: column;
   gap: 2em;
 }
-
-h4 {
+.explore__main h4 {
   margin-bottom: -1em;
+}
+
+.selectpl {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 1.5em;
+}
+.selectpl h2 {
+  text-align: center;
+}
+.selectpl__cntr {
+  margin-top: 0.5em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75em 1.5em;
+}
+.selectpl__pl {
+  display: flex;
+  align-items: center;
+  padding: 0.75em;
+  border-radius: 8px;
+  gap: 1em;
+  transition: background 50ms ease-out;
+}
+.selectpl__pl:hover {
+  background: rgba(218, 218, 218, 0.2);
+}
+.selectpl__img-cntr {
+  width: 4em;
+  height: 4em;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.selectpl span {
+  font-size: 1.25em;
 }
 
 .search {

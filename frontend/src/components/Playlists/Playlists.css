@@ -3,9 +3,6 @@
   flex-flow: column;
   gap: 1em;
 }
-.playlists__main.--blur {
-  filter: blur(5px);
-}
 .playlists__list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(16em, 1fr));
@@ -14,46 +11,23 @@
 
 .addplcard {
   border: #df235b 2px dashed;
-  padding: 25%;
 }
 .addplcard svg {
   color: #df235b;
+  width: 50%;
+  margin: auto;
 }
 
 .plform {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 999;
-  width: 40em;
+  width: 30em;
   display: flex;
   flex-flow: column;
   gap: 2em;
-  background: #0f1626;
-  padding: 2em;
-  border-radius: 10px;
-  transition: transform 150ms ease-out, opacity 150ms ease-out;
-  transform: scale(0.95) translate(-52.5%, -52.5%);
-  opacity: 0;
-  z-index: -1;
 }
-.plform.--shown {
-  transform: scale(1) translate(-50%, -50%);
-  opacity: 1;
-  z-index: 999;
-}
-.plform__cntr {
+.plform__btns {
   display: flex;
-  flex-flow: column;
-  gap: 1em;
-}
-.plform__cntr.--row {
-  flex-flow: row;
   justify-content: space-between;
-}
-.plform label {
-  font-weight: 500;
-  font-size: 1.1rem;
+  gap: 1em;
 }
 .plform input {
   border-bottom: 1px solid #d3d3d3;

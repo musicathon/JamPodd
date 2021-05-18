@@ -61,7 +61,7 @@ const PlaylistPage = ({ setCurrentTrackIndex, currentTrackList }) => {
 				imageSrc: 'https://source.unsplash.com/random/199x199'
 			}
 		],
-		imgSrc: 'https://source.unsplash.com/random/'
+		imageSrc: 'https://source.unsplash.com/random/'
 	};
 
 	return (
@@ -70,7 +70,7 @@ const PlaylistPage = ({ setCurrentTrackIndex, currentTrackList }) => {
 				<h4>Playlist</h4>
 
 				<div className='plinfo__img-cntr'>
-					<img src={playlist.imgSrc} alt='' />
+					<img src={playlist.imageSrc} alt='' />
 				</div>
 
 				<h1 className='plinfo__title'>{playlist.title}</h1>

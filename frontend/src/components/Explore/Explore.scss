@@ -4,10 +4,52 @@
 	display: flex;
 	flex-flow: column;
 	gap: 2em;
+
+	h4 {
+		margin-bottom: -1em;
+	}
 }
 
-h4 {
-	margin-bottom: -1em;
+.selectpl {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	gap: 1.5em;
+
+	h2 {
+		text-align: center;
+	}
+
+	&__cntr {
+		margin-top: 0.5em;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0.75em 1.5em;
+	}
+
+	&__pl {
+		display: flex;
+		align-items: center;
+		padding: 0.75em;
+		border-radius: 8px;
+		gap: 1em;
+
+		transition: background 50ms ease-out;
+		&:hover {
+			background: common.$faded;
+		}
+	}
+
+	&__img-cntr {
+		width: 4em;
+		height: 4em;
+		border-radius: 5px;
+		overflow: hidden;
+	}
+
+	span {
+		font-size: 1.25em;
+	}
 }
 
 .search {

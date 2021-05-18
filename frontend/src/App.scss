@@ -47,13 +47,14 @@ ul {
 	list-style: none;
 }
 
-input[type='text'],
-input[type='url'] {
+input[type='text'] {
 	background: inherit;
 	font: inherit;
 	color: inherit;
 	border: 0;
 	display: block;
+	outline: 0;
+	width: 100%;
 }
 
 input[type='checkbox'] {
@@ -302,4 +303,39 @@ svg {
 			display: none;
 		}
 	}
+}
+
+.popup {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+
+	background: common.$bg-darker;
+	padding: 2.25em;
+	border-radius: 16px;
+
+	transform: scale(0.95) translate(-52.5%, -52.5%);
+	opacity: 0;
+	z-index: -1;
+	pointer-events: none;
+	transition: transform 150ms ease-out, opacity 150ms ease-out;
+	&.--shown {
+		transform: scale(1) translate(-50%, -50%);
+		opacity: 1;
+		z-index: 999;
+		pointer-events: all;
+	}
+
+	&__behind {
+		transition: filter 150ms ease-out;
+
+		&.--defocus {
+			filter: blur(3px) brightness(75%);
+			pointer-events: none;
+		}
+	}
+}
+
+.error {
+	color: change-color(common.$faded, $alpha: 0.3);
 }
