@@ -68,15 +68,24 @@ footer {
 			}
 
 			&.--active svg {
-				fill: common.$primary;
+				color: common.$primary;
 			}
 		}
 	}
 
 	&__bar {
 		min-width: 250px;
-		width: 175%;
+		width: 200%;
 		max-width: 500px;
+
+		display: flex;
+		align-items: center;
+		gap: 0.5em;
+	}
+
+	&__duration {
+		flex: 4em 1 0;
+		text-align: center;
 	}
 }
 
@@ -84,7 +93,7 @@ footer {
 	justify-self: end;
 	display: flex;
 	align-items: center;
-	gap: 1.25em;
+	gap: 1em;
 
 	&__btn {
 		width: 1.75em;

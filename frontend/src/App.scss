@@ -62,6 +62,7 @@ input[type='checkbox'] {
 }
 
 input[type='range'] {
+	width: 100%;
 	-webkit-appearance: none; /* Hides the slider so that custom slider can be made */
 
 	&::-webkit-slider-thumb {

@@ -1,4 +1,4 @@
-// TODO: Add shuffle, duration
+// TODO: Add duration
 
 import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
@@ -33,9 +33,6 @@ const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) =
 		}, [500]);
 	};
 
-	// pause/play song
-	const pausePlay = () => setIsPlaying(!isPlaying);
-
 	useEffect(() => {
 		if (isPlaying) {
 			audioRef.current.play();
@@ -49,14 +46,13 @@ const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) =
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isPlaying]);
 
-	const toggleRepeat = () => setDoRepeat(!doRepeat);
-
 	// change tracks
 	const toPrevTrack = () => {
 		if (trackProgress > 5 || doRepeat) {
 			audioRef.current.currentTime = 0;
 			audioRef.current.play();
-		} else if (currentTrackIndex === 0)
+		} else if (doShuffle) setCurrentTrackIndex(getRandomTrackIndex());
+		else if (currentTrackIndex === 0)
 			setCurrentTrackIndex(currentTrackList.length - 1);
 		else setCurrentTrackIndex(currentTrackIndex - 1);
 	};
@@ -65,9 +61,20 @@ const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) =
 		if (doRepeat) {
 			audioRef.current.currentTime = 0;
 			audioRef.current.play();
-		} else if (currentTrackIndex === currentTrackList.length - 1)
+		} else if (doShuffle) setCurrentTrackIndex(getRandomTrackIndex());
+		else if (currentTrackIndex === currentTrackList.length - 1)
 			setCurrentTrackIndex(0);
 		else setCurrentTrackIndex(currentTrackIndex + 1);
+	};
+
+	const getRandomTrackIndex = () => {
+		let randomTrackIndex;
+
+		do {
+			randomTrackIndex = Math.floor(Math.random() * currentTrackList.length);
+		} while (randomTrackIndex === currentTrackIndex);
+
+		return randomTrackIndex;
 	};
 
 	// reset audio source when currentTrackIndex or currentTrackList change
@@ -105,6 +112,17 @@ const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) =
 		setVolume(value);
 	};
 
+	const parseTime = (timeInSec) => {
+		if (!timeInSec) return NaN;
+
+		const mins = Math.floor(timeInSec / 60).toString();
+		const seconds = Math.floor(timeInSec % 60)
+			.toString()
+			.padStart(2, '0');
+
+		return `${mins}:${seconds}`;
+	};
+
 	// get % of track progress
 	const { duration } = audioRef.current;
 	const trackPerc = duration ? (trackProgress / duration) * 100 : 0,
@@ -134,10 +152,9 @@ const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) =
 			<div className='player'>
 				<div className='player__btns'>
 					<button
-						className={`player__btn --tertiary  ${
-							doRepeat ? '--active' : ''
-						}`}
-						onClick={toggleRepeat}
+						className={`player__btn --tertiary 
+						${doRepeat ? '--active' : ''}`}
+						onClick={() => setDoRepeat(!doRepeat)}
 					>
 						<IoRepeatOutline />
 					</button>
@@ -146,29 +163,41 @@ const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) =
 					</button>
 					<button
 						className={`player__btn --primary ${isPlaying ? '--active' : ''}`}
-						onClick={pausePlay}
+						onClick={() => setIsPlaying(!isPlaying)}
 					>
 						{isPlaying ? <AiFillPauseCircle /> : <AiFillPlayCircle />}
 					</button>
 					<button className='player__btn --secondary' onClick={toNextTrack}>
 						<BiSkipNext />
 					</button>
-					<button className={`player__btn --tertiary`}>
+					<button
+						className={`player__btn --tertiary 
+						${doShuffle ? '--active' : ''}`}
+						onClick={() => setDoShuffle(!doShuffle)}
+					>
 						<IoShuffleOutline />
 					</button>
 				</div>
-				<input
-					type='range'
-					value={trackProgress}
-					step='0.5'
-					min='0'
-					max={duration ? duration : `${duration}`}
-					style={{ background: seekStyle }}
-					className='player__bar bar'
-					onChange={(e) => onSeek(e.target.value)}
-					onMouseUp={onSeekEnd}
-					onKeyUp={onSeekEnd}
-				/>
+				<div className='player__bar'>
+					<span className='player__duration'>
+						{parseTime(trackProgress) || '0:00'}
+					</span>
+					<input
+						type='range'
+						value={trackProgress}
+						step='0.5'
+						min='0'
+						max={duration ? duration : ``}
+						style={{ background: seekStyle }}
+						className='bar'
+						onChange={(e) => onSeek(e.target.value)}
+						onMouseUp={onSeekEnd}
+						onKeyUp={onSeekEnd}
+					/>
+					<span className='player__duration'>
+						{parseTime(duration) || '0:00'}
+					</span>
+				</div>
 			</div>
 
 			<div className='volume'>
