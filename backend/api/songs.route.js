@@ -1,14 +1,10 @@
 import express from 'express';
-import MusicControl from "./music_controller.js"
+import songsControl from './songs.controller.js';
 // Add DAO that connects to the 'music' collection on mongo
 
-const router = express.Router()
+const router = express.Router();
 
-router.route("/").get(MusicControl.apiGetSongs)
-//router.route("/id/:id").get(MusicControl.apiGetSongById)
+router.route('/').get(songsControl.apiGetSongsBySearch);
+// router.route('/ids/:ids').get(MusicControl.apiGetSongByIds);
 
-
-
-export default router
-
-
+export default router;
