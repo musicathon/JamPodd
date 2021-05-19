@@ -113,9 +113,9 @@ const Playlists = () => {
 
 					{playlists.map((playlist, index) => (
 						<article className='plcard' key={index}>
-							<div className='plcard__img-cntr'>
+							<Link to='/playlist' className='plcard__img-cntr'>
 								<img src={playlist.imageSrc} alt='playlist art' />
-							</div>
+							</Link>
 
 							<div className='plcard__info'>
 								<Link to='/playlist' className='plcard__title-cntr'>

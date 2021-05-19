@@ -64,7 +64,7 @@ footer {
 			width: 1.5em;
 
 			&:active {
-				transform: scale(0.97);
+				transform: scale(0.96);
 			}
 
 			&.--active svg {
@@ -96,7 +96,12 @@ footer {
 	gap: 1em;
 
 	&__btn {
-		width: 1.75em;
+		width: 2em;
+
+		transition: transform 50ms ease-in-out;
+		&:active {
+			transform: scale(0.95);
+		}
 	}
 
 	&__bar {

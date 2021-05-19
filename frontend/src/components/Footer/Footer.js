@@ -1,17 +1,27 @@
-// TODO: Add duration
-
 import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import './Footer.css';
 import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai';
 import { BiSkipNext, BiSkipPrevious } from 'react-icons/bi';
-import { IoShuffleOutline, IoRepeatOutline, IoVolumeMedium } from 'react-icons/io5';
+import {
+	IoShuffleOutline,
+	IoRepeatOutline,
+	IoVolumeOff,
+	IoVolumeLow,
+	IoVolumeMedium,
+	IoVolumeHigh
+} from 'react-icons/io5';
 
-const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) => {
+const Footer = ({
+	currentTrackIndex,
+	setCurrentTrackIndex,
+	doShuffle,
+	setDoShuffle,
+	currentTrackList
+}) => {
 	const [trackProgress, setTrackProgress] = useState(0); // stores track progress in seconds
 	const [volume, setVolume] = useState(0.75); // stores volume
 	const [isPlaying, setIsPlaying] = useState(false); // play/pause state
-	const [doShuffle, setDoShuffle] = useState(false); // shuffle state
 	const [doRepeat, setDoRepeat] = useState(false); // repeat state. when true, repeats the same track
 
 	const { title, artist, audioSrc, imageSrc } = currentTrackList[currentTrackIndex]; // get current track info
@@ -68,6 +78,9 @@ const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) =
 	};
 
 	const getRandomTrackIndex = () => {
+		// prevent infinite loop when currentTrackList has 1 song or less
+		if (currentTrackList.length <= 1) return currentTrackIndex;
+
 		let randomTrackIndex;
 
 		do {
@@ -107,10 +120,8 @@ const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) =
 		startUpdatingSeek();
 	};
 
-	const onVolumeChange = (value) => {
-		audioRef.current.volume = value;
-		setVolume(value);
-	};
+	const toggleMute = () => (volume === 0 ? setVolume(0.75) : setVolume(0));
+	useEffect(() => (audioRef.current.volume = volume), [volume]);
 
 	const parseTime = (timeInSec) => {
 		if (!timeInSec) return NaN;
@@ -127,6 +138,12 @@ const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) =
 	const { duration } = audioRef.current;
 	const trackPerc = duration ? (trackProgress / duration) * 100 : 0,
 		volumePerc = volume * 100;
+
+	let volumeIcon;
+	if (volume > 0.75) volumeIcon = <IoVolumeHigh />;
+	else if (volume > 0.35) volumeIcon = <IoVolumeMedium />;
+	else if (volume > 0) volumeIcon = <IoVolumeLow />;
+	else volumeIcon = <IoVolumeOff />;
 
 	// range input styling because css sux
 	const seekStyle = `
@@ -201,8 +218,8 @@ const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) =
 			</div>
 
 			<div className='volume'>
-				<button className='volume__btn'>
-					<IoVolumeMedium />
+				<button className='volume__btn' onClick={toggleMute}>
+					{volumeIcon}
 				</button>
 				<input
 					type='range'
@@ -212,7 +229,7 @@ const Footer = ({ currentTrackIndex, setCurrentTrackIndex, currentTrackList }) =
 					max='1'
 					style={{ background: volumeBarStyle }}
 					className='volume__bar bar'
-					onChange={(e) => onVolumeChange(e.target.value)}
+					onChange={(e) => setVolume(e.target.value)}
 				/>
 			</div>
 		</footer>

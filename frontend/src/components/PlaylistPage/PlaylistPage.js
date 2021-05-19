@@ -3,10 +3,15 @@ import { AiFillPlayCircle } from 'react-icons/ai';
 import { CgTrashEmpty } from 'react-icons/cg';
 import { IoShuffleOutline, IoPlay } from 'react-icons/io5';
 
-const PlaylistPage = ({ setCurrentTrackIndex, setCurrentTrackList }) => {
+const PlaylistPage = ({ setCurrentTrackIndex, setCurrentTrackList, setDoShuffle }) => {
 	const onPlay = (index) => {
 		setCurrentTrackList(playlist.tracks);
 		setCurrentTrackIndex(index);
+	};
+
+	const onShuffle = () => {
+		setDoShuffle(true);
+		onPlay(Math.floor(Math.random() * playlist.tracks.length));
 	};
 
 	// get from backend
@@ -73,11 +78,20 @@ const PlaylistPage = ({ setCurrentTrackIndex, setCurrentTrackList }) => {
 
 				<div className='plinfo__extra'>
 					<span className='plinfo__song-count'>{playlist.songCount} Songs</span>
+
 					<div className='plinfo__btns'>
-						<button className='plinfo__btn --shuffle'>
+						<button
+							className='plinfo__btn --shuffle'
+							disabled={!playlist.tracks}
+							onClick={onShuffle}
+						>
 							<IoShuffleOutline />
 						</button>
-						<button className='plinfo__btn --play'>
+						<button
+							className='plinfo__btn --play'
+							disabled={!playlist.tracks}
+							onClick={() => onPlay(0)}
+						>
 							<AiFillPlayCircle />
 						</button>
 					</div>
@@ -85,41 +99,45 @@ const PlaylistPage = ({ setCurrentTrackIndex, setCurrentTrackList }) => {
 			</div>
 
 			<div className='songlist'>
-				{playlist.tracks.map((track, index) => (
-					<div className={`songfull`} key={index}>
-						<div className='songfull__cntr songsmall'>
-							<div className='songsmall__img-cntr'>
-								<img src={track.imageSrc} alt='song art' />
-								<button
-									className='songfull__btn --play'
-									onClick={() => onPlay(index)}
-								>
-									<IoPlay />
-								</button>
+				{playlist.tracks &&
+					playlist.tracks.map((track, index) => (
+						<div className={`songfull`} key={index}>
+							<div className='songfull__cntr songsmall'>
+								<div className='songsmall__img-cntr'>
+									<img src={track.imageSrc} alt='song art' />
+									<button
+										className='songfull__btn --play'
+										onClick={() => onPlay(index)}
+									>
+										<IoPlay />
+									</button>
+								</div>
+
+								<div className='songsmall__info'>
+									<span className='songsmall__name'>{track.title}</span>
+									<span className='songsmall__artist'>
+										{track.artist}
+									</span>
+								</div>
 							</div>
 
-							<div className='songsmall__info'>
-								<span className='songsmall__name'>{track.title}</span>
-								<span className='songsmall__artist'>{track.artist}</span>
-							</div>
-						</div>
-
-						<span className='songfull__cntr songfull__album'>
-							{track.album}
-						</span>
-
-						<div className='songfull__cntr --fixed-width'>
-							<button className='songfull__btn --delete'>
-								<CgTrashEmpty />
-							</button>
-
-							<span className='songfull__duration'>
-								{track.duration.min}:
-								{track.duration.sec.toString().padStart(2, '0')}
+							<span className='songfull__cntr songfull__album'>
+								{track.album}
 							</span>
+
+							<div className='songfull__cntr --fixed-width'>
+								<button className='songfull__btn --delete'>
+									<CgTrashEmpty />
+								</button>
+
+								<span className='songfull__duration'>
+									{track.duration.min}:
+									{track.duration.sec.toString().padStart(2, '0')}
+								</span>
+							</div>
 						</div>
-					</div>
-				))}
+					))}
+				<span className='songlist__addmore'>Add Songs from the Explore tab!</span>
 			</div>
 		</main>
 	);

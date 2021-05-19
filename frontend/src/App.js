@@ -13,6 +13,7 @@ function App() {
 	const [gAuthRef, setGAuthRef] = useState();
 	const [currentTrackIndex, setCurrentTrackIndex] = useState();
 	const [currentTrackList, setCurrentTrackList] = useState([]);
+	const [doShuffle, setDoShuffle] = useState(false); // shuffle state
 
 	// reset currentTrackIndex and currentTrackList on when footer unmounts
 	useEffect(() => {
@@ -68,6 +69,7 @@ function App() {
 						<PlayListPage
 							setCurrentTrackList={setCurrentTrackList}
 							setCurrentTrackIndex={setCurrentTrackIndex}
+							setDoShuffle={setDoShuffle}
 						/>
 					</ConditionalRoute>
 				</Switch>
@@ -76,6 +78,8 @@ function App() {
 					<Footer
 						currentTrackIndex={currentTrackIndex}
 						setCurrentTrackIndex={setCurrentTrackIndex}
+						doShuffle={doShuffle}
+						setDoShuffle={setDoShuffle}
 						currentTrackList={currentTrackList}
 					/>
 				)}

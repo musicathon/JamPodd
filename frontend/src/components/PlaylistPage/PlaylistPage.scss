@@ -76,4 +76,10 @@
 	display: flex;
 	flex-flow: column;
 	gap: 0.5em;
+
+	&__addmore {
+		font-size: 1.25rem;
+		color: change-color(common.$faded, $alpha: 0.3);
+		text-align: right;
+	}
 }

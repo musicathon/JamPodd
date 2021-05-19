@@ -34,9 +34,13 @@
 		border-radius: 8px;
 		gap: 1em;
 
-		transition: background 50ms ease-out;
+		transition: background 50ms ease-out, transform 50ms ease-in-out;
 		&:hover {
 			background: common.$faded;
+		}
+
+		&:active {
+			transform: scale(0.98);
 		}
 	}
 
@@ -76,6 +80,13 @@
 
 		svg {
 			fill: common.$bg-darker;
+			transition: transform 50ms ease-in-out;
+		}
+
+		&:active {
+			svg {
+				transform: scale(0.92);
+			}
 		}
 	}
 }

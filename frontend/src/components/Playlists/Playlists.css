@@ -11,11 +11,15 @@
 
 .addplcard {
   border: #df235b 2px dashed;
+  transition: transform 50ms ease-in-out;
 }
 .addplcard svg {
   color: #df235b;
   width: 50%;
   margin: auto;
+}
+.addplcard:active {
+  transform: scale(0.985);
 }
 
 .plform {

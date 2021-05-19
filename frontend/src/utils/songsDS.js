@@ -1,6 +1,6 @@
 import http from '../http-common';
 
-class SongDS {
+class SongsDS {
 	getByKeyword(keyword) {
 		return http.get(`songs?keyword=${keyword}`);
 	}
@@ -10,4 +10,4 @@ class SongDS {
 	}
 }
 
-export default new SongDS();
+export default new SongsDS();
