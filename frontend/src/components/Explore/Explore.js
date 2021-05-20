@@ -16,6 +16,18 @@ const Explore = ({ setCurrentTrackIndex, setCurrentTrackList }) => {
 	const [playlists, setPlaylists] = useState();
 	const [showPlSelector, setShowPlSelector] = useState(false);
 
+	useEffect(() => {
+		if (!showPlSelector) return;
+
+		(async () =>
+			playlistsDS
+				.getAll()
+				.then((res) => {
+					setPlaylists(res.data.playlistList);
+				})
+				.catch((e) => console.error(e)))();
+	}, [showPlSelector]);
+
 	const onSearch = async (e) => {
 		e.preventDefault();
 
@@ -33,9 +45,21 @@ const Explore = ({ setCurrentTrackIndex, setCurrentTrackList }) => {
 		setIsAnySongChecked(Object.values(checkedSongs).some((value) => value === true));
 	};
 
-	const onPlSelect = (index) => {
-		// send index and checkedSongs to backend
+	const onPlSelect = (id) => {
 		setShowPlSelector(false);
+
+		const playlist = playlists.find((playlist) => playlist._id === id);
+		let trackIds = playlist.tracks || [],
+			newTrackIds = Object.keys(checkedSongs).filter((key) => checkedSongs[key]);
+
+		newTrackIds = newTrackIds.filter((newTrackId) => !trackIds.includes(newTrackId));
+
+		trackIds.push(...newTrackIds);
+
+		(async () =>
+			playlistsDS
+				.edit(playlist._id, playlist.playlist_name, trackIds)
+				.catch((e) => console.error(e)))();
 	};
 
 	const onPlay = (index) => {
@@ -96,7 +120,7 @@ const Explore = ({ setCurrentTrackIndex, setCurrentTrackList }) => {
 								<input
 									className='songfull__cntr songfull__checkbox'
 									type='checkbox'
-									name={index}
+									name={track._id}
 									onChange={onCheck}
 								/>
 							</div>
@@ -117,20 +141,22 @@ const Explore = ({ setCurrentTrackIndex, setCurrentTrackList }) => {
 			<div className={`selectpl popup ${showPlSelector ? '--shown' : ''}`}>
 				<h2>Select a Playlist</h2>
 
-				{playlists ? (
+				{playlists && playlists.length > 0 ? (
 					<div className='selectpl__cntr'>
 						{playlists.map((playlist, index) => (
 							<button
 								type='button'
 								className='selectpl__pl'
 								key={index}
-								onClick={() => onPlSelect(index)}
+								onClick={() => onPlSelect(playlist._id)}
 							>
 								<div className='selectpl__img-cntr'>
 									<img src={playlist.imageSrc} alt='playlist art' />
 								</div>
 
-								<span className='selectpl__title'>{playlist.title}</span>
+								<span className='selectpl__title'>
+									{playlist.playlist_name}
+								</span>
 							</button>
 						))}
 					</div>

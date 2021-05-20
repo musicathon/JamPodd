@@ -1,5 +1,5 @@
 import './App.css';
-import axios from 'axios';
+import http from './http-common';
 import { useEffect, useState } from 'react';
 import { Switch } from 'react-router-dom';
 import ConditionalRoute from './components/ConditionalRoute';
@@ -17,8 +17,8 @@ function App() {
 	const [doShuffle, setDoShuffle] = useState(false); // shuffle state
 
 	useEffect(() => {
-		if (gToken) axios.defaults.headers.common['user_id'] = gToken.profileObj.email;
-		else delete axios.defaults.headers.common['user_id'];
+		if (gToken) http.defaults.headers.common['user_id'] = gToken.profileObj.email;
+		else delete http.defaults.headers.common['user_id'];
 
 		// reset currentTrackIndex and currentTrackList on when footer unmounts
 		return () => {
