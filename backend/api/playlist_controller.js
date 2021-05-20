@@ -7,12 +7,9 @@ export default class PlaylistController {
     const page = req.query.page ? parseInt(req.query.page, 10) : 0
 
     let filters = {}
-    if (req.query.playlist_name) {
-      filters.playlist_name = req.query.playlist_name
-    } else if (req.query.keyword) {
-      filters.keyword = req.query.keyword
+    if (req.query.user_id) {
+      filters.user_id = req.query.user_id
     }
-
     const { playlistsList, totalNumPlaylists } = await PlaylistDAO.getPlaylist({
       filters,
       page,
@@ -20,9 +17,8 @@ export default class PlaylistController {
     })
 
     let response = {
-      restaurants: playlistsList,
+      playlists: playlistsList,
       page: page,
-      filters: filters,
       entries_per_page: playlistsPerPage,
       total_results: totalNumPlaylists,
     }

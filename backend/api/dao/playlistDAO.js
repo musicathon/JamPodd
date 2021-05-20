@@ -23,10 +23,8 @@ export default class PlaylistDAO {
   } = {}) {
     let query
     if (filters) {
-      if ("keyword" in filters) {
-        query = { $text: { $search: filters["keyword"] } }
-      } else if ("playlist_name" in filters) {
-        query = { "playlist_name": { $eq: filters["playlist_name"] } }
+      if ("user_id" in filters) {
+        query = { "user_id": { $eq: filters["user_id"] } }
       } 
     }
 
