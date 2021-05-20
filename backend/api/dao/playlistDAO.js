@@ -1,98 +1,83 @@
-import mongodb from "mongodb"
-const ObjectId = mongodb.ObjectID
+import mongodb from 'mongodb';
+const ObjectId = mongodb.ObjectID;
 
-let playlist
+let playlist;
 
 export default class PlaylistDAO {
-  static async injectDB(conn) {
-    if (playlist) {
-      return
-    }
-    try {
-      playlist = await conn.db(process.env.MUSIC_NS).collection("user_playlists")
-    } catch (e) {
-      console.error(`Unable to establish collection handles in userDAO: ${e}`)
-    }
-  }
+	static async injectDB(conn) {
+		if (playlist) {
+			return;
+		}
+		try {
+			playlist = await conn.db(process.env.MUSIC_NS).collection('user_playlists');
+		} catch (e) {
+			console.error(`Unable to establish collection handles in userDAO: ${e}`);
+		}
+	}
 
+	static async getPlaylists(user_id) {
+		const query = { user_id: { $eq: user_id } };
+		let cursor;
+		try {
+			cursor = await playlist.find(query);
+		} catch (e) {
+			console.error(`Unable to issue find command, ${e}`);
+			return { playlistList: [], totalNumPlaylists: 0 };
+		}
 
-  static async getPlaylist({
-    filters = null,
-    page = 0,
-    playlistsPerPage = 15,
-  } = {}) {
-    let query
-    if (filters) {
-      if ("user_id" in filters) {
-        query = { "user_id": { $eq: filters["user_id"] } }
-      } 
-    }
+		try {
+			const playlistList = await cursor.toArray();
+			const totalNumPlaylists = playlistList.length;
 
-    let cursor
-    
-    try {
-      cursor = await playlist.find(query)
-    } catch (e) {
-      console.error(`Unable to issue find command, ${e}`)
-      return { playlistList: [], totalNumPlaylists: 0 }
-    }
+			return { playlistList, totalNumPlaylists };
+		} catch (e) {
+			console.error(
+				`Unable to convert cursor to array or problem counting documents, ${e}`
+			);
+			return { playlistList: [], totalNumPlaylists: 0 };
+		}
+	}
 
-    const displayCursor = cursor.limit(playlistsPerPage).skip(playlistsPerPage * page)
+	static async addPlaylist(_id, userInfo, playlist_name) {
+		try {
+			const addedPlaylist = {
+				user_id: userInfo._id,
+				playlist_name: playlist_name,
+				playlistId: ObjectId(_id)
+			};
 
-    try {
-      const playlistList = await displayCursor.toArray()
-      const totalNumPlaylists = await playlist.countDocuments(query)
+			return await playlist.insertOne(addedPlaylist);
+		} catch (e) {
+			console.error(`Unable to add playlist: ${e}`);
+			return { error: e };
+		}
+	}
 
-      return { playlistList, totalNumPlaylists }
-    } catch (e) {
-      console.error(
-        `Unable to convert cursor to array or problem counting documents, ${e}`,
-      )
-      return { playlistList: [], totalNumPlaylists: 0 }
-    }
-  }
+	static async updatePlaylist(playlistId, userId, title) {
+		try {
+			const updatedPlaylist = await playlist.updateOne(
+				{ user_id: userId, _id: ObjectId(playlistId) },
+				{ $set: { title: title } }
+			);
 
-  static async addPlaylist(_id, userInfo, playlist_name) {
-    try {
-      const addedPlaylist = {
-          user_id: userInfo._id,
-          playlist_name: playlist_name,
-          playlistId: ObjectId(_id), }
+			return updatedPlaylist;
+		} catch (e) {
+			console.error(`Unable to edit playlist: ${e}`);
+			return { error: e };
+		}
+	}
 
-      return await playlist.insertOne(addedPlaylist)
-    } catch (e) {
-      console.error(`Unable to add playlist: ${e}`)
-      return { error: e }
-    }
-  }
+	static async deletePlaylist(playlistId, userId) {
+		try {
+			const deleteResponse = await playlist.deleteOne({
+				_id: ObjectId(playlistId),
+				user_id: userId
+			});
 
-  static async updatePlaylist(playlistId, userId, title) {
-    try {
-      const updatedPlaylist = await playlist.updateOne(
-        { user_id: userId, _id: ObjectId(playlistId)},
-        { $set: { title: title} },
-      )
-
-      return updatedPlaylist
-    } catch (e) {
-      console.error(`Unable to edit playlist: ${e}`)
-      return { error: e }
-    }
-  }
-
-  static async deletePlaylist(playlistId, userId) {
-
-    try {
-      const deleteResponse = await playlist.deleteOne({
-        _id: ObjectId(playlistId),
-        user_id: userId,
-      })
-
-      return deleteResponse
-    } catch (e) {
-      console.error(`Unable to delete playlist: ${e}`)
-      return { error: e }
-    }
-  }
-
+			return deleteResponse;
+		} catch (e) {
+			console.error(`Unable to delete playlist: ${e}`);
+			return { error: e };
+		}
+	}
 }

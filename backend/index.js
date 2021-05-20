@@ -1,7 +1,8 @@
 import mongodb from 'mongodb';
 import dotenv from 'dotenv';
 import app from './server.js';
-import songsDAO from './api/dao/songsDAO.js'
+import songsDAO from './api/dao/songsDAO.js';
+import playlistDAO from './api/dao/playlistDAO.js';
 dotenv.config();
 const MongoClient = mongodb.MongoClient;
 
@@ -18,6 +19,7 @@ MongoClient.connect(process.env.MUSIC_DB_URI, {
 	})
 	.then(async (client) => {
 		await songsDAO.injectDB(client);
+		await playlistDAO.injectDB(client);
 		app.listen(port, () => {
 			console.log('listening on port ' + port);
 		});
