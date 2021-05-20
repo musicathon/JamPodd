@@ -1,7 +1,7 @@
 import mongodb from 'mongodb';
 import dotenv from 'dotenv';
 import app from './server.js';
-import songsDAO from './dao/songsDAO.js';
+import songsDAO from './api/dao/songsDAO.js'
 dotenv.config();
 const MongoClient = mongodb.MongoClient;
 
