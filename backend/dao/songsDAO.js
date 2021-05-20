@@ -28,7 +28,7 @@ export default class songsDAO {
 						}
 					}
 			  ]
-			: [];
+			: [{ $sample: { size: songsPerPage } }];
 
 		let cursor;
 		try {
