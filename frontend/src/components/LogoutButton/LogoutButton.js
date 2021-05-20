@@ -4,12 +4,12 @@ import { useGoogleLogout } from 'react-google-login';
 
 const clientId = process.env.REACT_APP_GOOGLE_OAUTH_ID;
 
-function LogoutButton({ setGAuthRef, DPSrc }) {
+function LogoutButton({ setGToken, DPSrc }) {
 	const onLogoutSuccess = (res) => {
-		setGAuthRef(false);
+		setGToken(undefined);
 	};
 
-	const onFailure = () => console.log('Logout Failed');
+	const onFailure = () => console.error('Logout Failed');
 
 	const { signOut } = useGoogleLogout({
 		clientId,

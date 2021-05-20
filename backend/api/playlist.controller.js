@@ -53,15 +53,19 @@ export default class PlaylistController {
 
 		const playlist_name = req.body.playlist_name;
 		if (!playlist_name) {
-			res.json({ error: 'no playlist name' });
+			res.status(400).json({ error: 'no playlist name' });
 			return;
 		}
 
 		try {
 			const { error } = await PlaylistDAO.addPlaylist(user_id, playlist_name);
-			res.json({ status: 'success' });
 
-			if (error) res.status(400).json({ error });
+			if (error) {
+				res.status(400).json({ error });
+				return;
+			}
+
+			res.json({ status: 'success' });
 		} catch (e) {
 			res.status(500).json({ error: e.message });
 		}
@@ -87,7 +91,10 @@ export default class PlaylistController {
 				tracks
 			);
 
-			if (error) res.status(400).json({ error });
+			if (error) {
+				res.status(400).json({ error });
+				return;
+			}
 
 			res.json({ status: 'success' });
 		} catch (e) {
@@ -107,7 +114,10 @@ export default class PlaylistController {
 		try {
 			const { error } = await PlaylistDAO.deletePlaylist(playlist_id, user_id);
 
-			if (error) res.status(400).json({ error });
+			if (error) {
+				res.status(400).json({ error });
+				return;
+			}
 
 			res.json({ status: 'success' });
 		} catch (e) {

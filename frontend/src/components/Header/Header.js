@@ -6,7 +6,7 @@ import LogoutButton from '../LogoutButton/LogoutButton';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { IoAlbums } from 'react-icons/io5';
 
-const Header = ({ setGAuthRef, DPSrc }) => {
+const Header = ({ setGToken, DPSrc }) => {
 	return (
 		<header>
 			<div className='logo'>
@@ -35,7 +35,7 @@ const Header = ({ setGAuthRef, DPSrc }) => {
 			</nav>
 
 			<div className='logout'>
-				<LogoutButton setGAuthRef={setGAuthRef} DPSrc={DPSrc} />
+				<LogoutButton setGToken={setGToken} DPSrc={DPSrc} />
 			</div>
 		</header>
 	);

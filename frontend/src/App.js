@@ -1,4 +1,5 @@
 import './App.css';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Switch } from 'react-router-dom';
 import ConditionalRoute from './components/ConditionalRoute';
@@ -10,29 +11,32 @@ import Playlists from './components/Playlists/Playlists';
 import PlayListPage from './components/PlaylistPage/PlaylistPage';
 
 function App() {
-	const [gAuthRef, setGAuthRef] = useState();
+	const [gToken, setGToken] = useState();
 	const [currentTrackIndex, setCurrentTrackIndex] = useState();
 	const [currentTrackList, setCurrentTrackList] = useState([]);
 	const [doShuffle, setDoShuffle] = useState(false); // shuffle state
 
-	// reset currentTrackIndex and currentTrackList on when footer unmounts
 	useEffect(() => {
+		if (gToken) axios.defaults.headers.common['user_id'] = gToken.profileObj.email;
+		else delete axios.defaults.headers.common['user_id'];
+
+		// reset currentTrackIndex and currentTrackList on when footer unmounts
 		return () => {
 			setCurrentTrackIndex(undefined);
 			setCurrentTrackList([]);
 		};
-	}, [gAuthRef]);
+	}, [gToken]);
 
 	return (
 		<Switch>
-			<ConditionalRoute condition={!gAuthRef} exact path='/login' redirectPath='/'>
-				<LoginPage setGAuthRef={setGAuthRef} />
+			<ConditionalRoute condition={!gToken} exact path='/login' redirectPath='/'>
+				<LoginPage setGToken={setGToken} />
 			</ConditionalRoute>
 
-			<ConditionalRoute condition={!!gAuthRef} path='/' redirectPath='/login'>
+			<ConditionalRoute condition={!!gToken} path='/' redirectPath='/login'>
 				<Header
-					setGAuthRef={setGAuthRef}
-					DPSrc={gAuthRef ? gAuthRef.profileObj.imageUrl : ''}
+					setGToken={setGToken}
+					DPSrc={gToken ? gToken.profileObj.imageUrl : ''}
 				/>
 				<Switch>
 					{/* redirect '/' to '/playlists' */}
@@ -43,7 +47,7 @@ function App() {
 						redirectPath='/playlists'
 					/>
 					<ConditionalRoute
-						condition={!!gAuthRef}
+						condition={!!gToken}
 						exact
 						path='/explore'
 						redirectPath='/login'
@@ -54,7 +58,7 @@ function App() {
 						/>
 					</ConditionalRoute>
 					<ConditionalRoute
-						condition={!!gAuthRef}
+						condition={!!gToken}
 						exact
 						path='/playlists'
 						redirectPath='/login'
@@ -62,7 +66,7 @@ function App() {
 						<Playlists />
 					</ConditionalRoute>
 					<ConditionalRoute
-						condition={!!gAuthRef}
+						condition={!!gToken}
 						path='/playlist'
 						redirectPath='/login'
 					>
