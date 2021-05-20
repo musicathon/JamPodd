@@ -79,10 +79,15 @@ export default class PlaylistDAO {
 	}
 
 	static async updatePlaylist(playlist_id, user_id, playlist_name, tracks) {
+		let setObj = {};
+
+		if (tracks) setObj.tracks = tracks;
+		if (playlist_name) setObj.playlist_name = playlist_name;
+
 		try {
 			return await playlist.updateOne(
 				{ user_id: user_id, _id: ObjectId(playlist_id) },
-				{ $set: { playlist_name, tracks } }
+				{ $set: setObj }
 			);
 		} catch (e) {
 			console.error(`Unable to edit playlist: ${e}`);
