@@ -1,4 +1,4 @@
-import songsDAO from './dao/songsDAO.js';
+import songsDAO from '../dao/songsDAO.js';
 
 export default class MusicController {
 	static async apiGetSongsBySearch(req, res, next) {

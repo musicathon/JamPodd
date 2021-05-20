@@ -17,6 +17,7 @@ export default class PlaylistDAO {
 
 	static async getPlaylists(user_id) {
 		const query = { user_id: { $eq: user_id } };
+
 		let cursor;
 		try {
 			cursor = await playlist.find(query);
@@ -38,43 +39,63 @@ export default class PlaylistDAO {
 		}
 	}
 
-	static async addPlaylist(_id, userInfo, playlist_name) {
+	static async getPlaylistById(user_id, playlist_id) {
+		let cursor;
+
 		try {
-			const addedPlaylist = {
-				user_id: userInfo._id,
-				playlist_name: playlist_name,
-				playlistId: ObjectId(_id)
+			const query = {
+				user_id: { $eq: user_id },
+				_id: { $eq: ObjectId(playlist_id) }
 			};
 
-			return await playlist.insertOne(addedPlaylist);
+			cursor = await playlist.find(query);
+		} catch (e) {
+			console.error(`Unable to issue find command, ${e}`);
+			return {};
+		}
+
+		try {
+			const playlist = await cursor.toArray();
+
+			return playlist[0];
+		} catch (e) {
+			console.error(`Unable to convert cursor to array, ${e}`);
+			return {};
+		}
+	}
+
+	static async addPlaylist(user_id, playlist_name) {
+		const newPlaylist = {
+			user_id,
+			playlist_name
+		};
+
+		try {
+			return await playlist.insertOne(newPlaylist);
 		} catch (e) {
 			console.error(`Unable to add playlist: ${e}`);
 			return { error: e };
 		}
 	}
 
-	static async updatePlaylist(playlistId, userId, title) {
+	static async updatePlaylist(playlist_id, user_id, playlist_name, tracks) {
 		try {
-			const updatedPlaylist = await playlist.updateOne(
-				{ user_id: userId, _id: ObjectId(playlistId) },
-				{ $set: { title: title } }
+			return await playlist.updateOne(
+				{ user_id: user_id, _id: ObjectId(playlist_id) },
+				{ $set: { playlist_name, tracks } }
 			);
-
-			return updatedPlaylist;
 		} catch (e) {
 			console.error(`Unable to edit playlist: ${e}`);
 			return { error: e };
 		}
 	}
 
-	static async deletePlaylist(playlistId, userId) {
+	static async deletePlaylist(playlist_id, user_id) {
 		try {
-			const deleteResponse = await playlist.deleteOne({
-				_id: ObjectId(playlistId),
-				user_id: userId
+			return await playlist.deleteOne({
+				_id: ObjectId(playlist_id),
+				user_id: user_id
 			});
-
-			return deleteResponse;
 		} catch (e) {
 			console.error(`Unable to delete playlist: ${e}`);
 			return { error: e };

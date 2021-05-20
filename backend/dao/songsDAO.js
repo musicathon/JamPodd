@@ -1,13 +1,13 @@
 import mongodb from 'mongodb';
 const ObjectId = mongodb.ObjectID;
-let music;
+let songs;
 
 export default class songsDAO {
 	static async injectDB(conn) {
-		if (music) return;
+		if (songs) return;
 
 		try {
-			music = await conn.db(process.env.MUSIC_NS).collection('songs');
+			songs = await conn.db(process.env.MUSIC_NS).collection('songs');
 		} catch (e) {
 			console.error(`Unable to establish a collection handle in MusicDAO: ${e}`);
 		}
@@ -32,7 +32,7 @@ export default class songsDAO {
 
 		let cursor;
 		try {
-			cursor = await music.aggregate(query).limit(songsPerPage);
+			cursor = await songs.aggregate(query).limit(songsPerPage);
 		} catch (e) {
 			console.error(`Unable to issue aggregate command, ${e}`);
 			return { songsList: [], totalNumSongs: 0 };
@@ -52,13 +52,13 @@ export default class songsDAO {
 	}
 
 	static async getSongsById(ids = []) {
-		const objIds = ids.map((id) => ObjectId(id));
-
-		const query = objIds ? { _id: { $in: objIds } } : {};
-
 		let cursor;
 		try {
-			cursor = await music.find(query);
+			const objIds = ids.map((id) => ObjectId(id));
+
+			const query = objIds ? { _id: { $in: objIds } } : {};
+
+			cursor = await songs.find(query);
 		} catch (e) {
 			console.error(`Unable to issue find command, ${e}`);
 			return { songsList: [], totalNumSongs: 0 };
