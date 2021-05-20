@@ -1,4 +1,4 @@
-const { OAuth2Client } = require('googlwauth-library');
+const { OAuth2Client } = require('google-auth-library');
 const client = new oAuth2Client(process.allowedNodeEnvironmentFlags.GOOGLE_CLIENT_ID);
 
 const googleAuth = async(token) => {
