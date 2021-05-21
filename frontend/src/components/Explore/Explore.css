@@ -62,6 +62,15 @@
   padding: 0 1em;
   font-size: 1.3rem;
 }
+.search input::-moz-placeholder {
+  font-size: 0.9em;
+}
+.search input:-ms-input-placeholder {
+  font-size: 0.9em;
+}
+.search input::placeholder {
+  font-size: 0.9em;
+}
 .search button {
   flex: 8em 0;
   padding: 0.5em;

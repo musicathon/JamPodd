@@ -16,6 +16,8 @@ const Playlists = () => {
 			.then((res) => setPlaylists(res.data.playlistList))
 			.catch((e) => console.error(e));
 
+	// stfu linter:
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => refreshPlaylists(), []);
 
 	const [showPlForm, setShowPlForm] = useState(false);
@@ -42,7 +44,7 @@ const Playlists = () => {
 
 		if (isEditing)
 			await playlistsDS
-				.edit(editingPlaylistId, formPlName)
+				.edit({ id: editingPlaylistId, title: formPlName })
 				.catch((e) => console.error(e));
 		else await playlistsDS.create(formPlName).catch((e) => console.error(e));
 
@@ -116,7 +118,10 @@ const Playlists = () => {
 
 					{playlists.map((playlist) => (
 						<article className='plcard' key={playlist._id}>
-							<Link to='/playlist' className='plcard__img-cntr'>
+							<Link
+								to={`/playlist/${playlist._id}`}
+								className='plcard__img-cntr'
+							>
 								<img
 									src={playlist.imageSrc || 'no-pl-img.jpg'}
 									alt='playlist art'
@@ -124,7 +129,10 @@ const Playlists = () => {
 							</Link>
 
 							<div className='plcard__info'>
-								<Link to='/playlist' className='plcard__title-cntr'>
+								<Link
+									to={`/playlist/${playlist._id}`}
+									className='plcard__title-cntr'
+								>
 									<h2>{playlist.title}</h2>
 								</Link>
 

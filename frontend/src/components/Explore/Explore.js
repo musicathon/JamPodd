@@ -1,7 +1,7 @@
 import './Explore.css';
 import songsDS from '../../utils/songsDS';
 import playlistsDS from '../../utils/PlaylistsDS';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { IoMdAdd } from 'react-icons/io';
 import { IoPlay, IoClose } from 'react-icons/io5';
@@ -54,7 +54,9 @@ const Explore = ({ setCurrentTrackIndex, setCurrentTrackList }) => {
 		newTrackIds = newTrackIds.filter((newTrackId) => !trackIds.includes(newTrackId));
 		trackIds.push(...newTrackIds);
 
-		await playlistsDS.edit(playlist._id, trackIds).catch((e) => console.error(e));
+		await playlistsDS
+			.edit({ id: playlist._id, tracks: trackIds })
+			.catch((e) => console.error(e));
 	};
 
 	const onPlay = (index) => {
@@ -147,7 +149,7 @@ const Explore = ({ setCurrentTrackIndex, setCurrentTrackList }) => {
 							>
 								<div className='selectpl__img-cntr'>
 									<img
-										src={playlist.imageSrc || 'no-pl-img.jpg'}
+										src={playlist.imageSrc || '/no-pl-img.jpg'}
 										alt='playlist art'
 									/>
 								</div>
@@ -181,6 +183,7 @@ const Explore = ({ setCurrentTrackIndex, setCurrentTrackList }) => {
 						type='text'
 						onChange={(e) => setQuery(e.target.value)}
 						value={query}
+						placeholder='leave empty for random'
 					/>
 					<button type='submit'>
 						<AiOutlineSearch />

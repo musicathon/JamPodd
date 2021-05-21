@@ -24,6 +24,7 @@ function App() {
 			delete http.defaults.headers.common['user_id'];
 			setCurrentTrackIndex(undefined);
 			setCurrentTrackList([]);
+			setDoShuffle(false);
 		};
 	}, [gToken]);
 
@@ -67,7 +68,7 @@ function App() {
 					</ConditionalRoute>
 					<ConditionalRoute
 						condition={!!gToken}
-						path='/playlist'
+						path='/playlist/:id'
 						redirectPath='/login'
 					>
 						<PlayListPage

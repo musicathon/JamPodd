@@ -14,7 +14,7 @@ class PlayListsDS {
 		return http.post('playlists/', data);
 	}
 
-	edit(id, title, tracks) {
+	edit({ id, title, tracks }) {
 		const data = { title, tracks };
 		return http.put(`playlists/id/${id}`, data);
 	}
