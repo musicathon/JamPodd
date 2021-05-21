@@ -18,6 +18,7 @@ function LoginPage({ setGToken }) {
 		onFailure,
 		clientId,
 		hostedDomain: 'goa.bits-pilani.ac.in',
+		prompt: "select_account",
 		isSignedIn: true
 	});
 
