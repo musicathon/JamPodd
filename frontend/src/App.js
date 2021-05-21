@@ -18,10 +18,10 @@ function App() {
 
 	useEffect(() => {
 		if (gToken) http.defaults.headers.common['user_id'] = gToken.profileObj.email;
-		else delete http.defaults.headers.common['user_id'];
 
-		// reset currentTrackIndex and currentTrackList on when footer unmounts
+		// reset auth header, currentTrackIndex and currentTrackList on when footer unmounts
 		return () => {
+			delete http.defaults.headers.common['user_id'];
 			setCurrentTrackIndex(undefined);
 			setCurrentTrackList([]);
 		};

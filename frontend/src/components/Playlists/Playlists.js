@@ -1,5 +1,6 @@
 import './Playlists.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import playlistsDS from '../../utils/PlaylistsDS';
 import { Link } from 'react-router-dom';
 import { MdModeEdit } from 'react-icons/md';
 import { IoMdAdd, IoMdCheckmark } from 'react-icons/io';
@@ -7,60 +8,66 @@ import { CgTrashEmpty } from 'react-icons/cg';
 import { IoClose } from 'react-icons/io5';
 
 const Playlists = () => {
-	const [formPlName, setFormPlName] = useState('');
-	const [showPlForm, setShowPlForm] = useState(false);
+	const [playlists, setPlaylists] = useState([]);
 
-	// create new playlist
-	const create = () => {
+	const refreshPlaylists = async () =>
+		await playlistsDS
+			.getAll()
+			.then((res) => setPlaylists(res.data.playlistList))
+			.catch((e) => console.error(e));
+
+	useEffect(() => refreshPlaylists(), []);
+
+	const [showPlForm, setShowPlForm] = useState(false);
+	const [formPlName, setFormPlName] = useState('');
+	const [isEditing, setIsEditing] = useState(false);
+	const [editingPlaylistId, setEditingPlaylistId] = useState();
+
+	const showPopup = (plId) => {
+		if (plId) {
+			setFormPlName(playlists.find((playlist) => playlist._id === plId).title);
+			setIsEditing(true);
+			setEditingPlaylistId(plId);
+		} else {
+			setFormPlName('');
+			setIsEditing(false);
+			setEditingPlaylistId(undefined);
+		}
+
+		setShowPlForm(true);
+	};
+
+	const onSubmit = async (e) => {
+		e.preventDefault();
+
+		if (isEditing)
+			await playlistsDS
+				.edit(editingPlaylistId, formPlName)
+				.catch((e) => console.error(e));
+		else await playlistsDS.create(formPlName).catch((e) => console.error(e));
+
+		refreshPlaylists();
+		setShowPlForm(false);
+	};
+
+	const onDelete = async () => {
+		await playlistsDS.delete(editingPlaylistId).catch((e) => console.error(e));
+
+		refreshPlaylists();
+		setShowPlForm(false);
+	};
+
+	const onCancel = () => {
 		setFormPlName('');
 		setIsEditing(false);
-		setShowPlForm(true);
+		setEditingPlaylistId(undefined);
+		setShowPlForm(false);
 	};
-
-	// edit existing playlist
-	const [isEditing, setIsEditing] = useState(false);
-	const edit = (plId) => {
-		setFormPlName(playlists[plId].title);
-		setIsEditing(true);
-		setShowPlForm(true);
-	};
-
-	// get from backend
-	const playlists = [
-		{
-			title: 'Indie',
-			songCount: 65,
-			imageSrc: 'https://source.unsplash.com/random/'
-		},
-		{
-			title: 'Truth or Consequences',
-			songCount: 9,
-			imageSrc:
-				'https://media.pitchfork.com/photos/5e6bb1b2690af00008f803fa/1:1/w_600/Truth%20or%20Consequences_Yumi%20Zouma.jpg'
-		},
-		{
-			title: 'Safety',
-			songCount: 6,
-			imageSrc:
-				'https://i1.sndcdn.com/artworks-vXenm8RPv3AE8grN-5tyRHQ-t500x500.jpg'
-		},
-		{
-			title: 'lofi',
-			songCount: 47,
-			imageSrc:
-				'https://is2-ssl.mzstatic.com/image/thumb/Music124/v4/eb/09/35/eb0935a7-d940-2583-51ca-ed4007752e3b/cover.jpg/400x400bb.jpeg'
-		},
-		{
-			title: 'Attack on Titan',
-			songCount: 7,
-			imageSrc: 'https://wallpaperaccess.com/full/279058.jpg'
-		}
-	];
 
 	return (
 		<>
 			<form
-				onSubmit={(e) => e.preventDefault()}
+				onSubmit={onSubmit}
 				className={`plform popup ${showPlForm ? '--shown' : ''}`}
 			>
 				<h2>{isEditing ? 'Edit' : 'Create a'} Playlist</h2>
@@ -77,17 +84,13 @@ const Playlists = () => {
 				/>
 
 				<div className='plform__btns'>
-					<button
-						type='button'
-						className='btn --cancel'
-						onClick={() => setShowPlForm(false)}
-					>
+					<button type='button' className='btn --cancel' onClick={onCancel}>
 						<IoClose />
 						<span>Cancel</span>
 					</button>
 
 					{isEditing && (
-						<button type='button' className='btn --delete'>
+						<button type='button' className='btn --delete' onClick={onDelete}>
 							<CgTrashEmpty />
 							<span>Delete</span>
 						</button>
@@ -107,14 +110,17 @@ const Playlists = () => {
 				<h4>Playlists</h4>
 
 				<div className='playlists__list'>
-					<button className='plcard addplcard' onClick={create}>
+					<button className='plcard addplcard' onClick={() => showPopup()}>
 						<IoMdAdd />
 					</button>
 
-					{playlists.map((playlist, index) => (
-						<article className='plcard' key={index}>
+					{playlists.map((playlist) => (
+						<article className='plcard' key={playlist._id}>
 							<Link to='/playlist' className='plcard__img-cntr'>
-								<img src={playlist.imageSrc} alt='playlist art' />
+								<img
+									src={playlist.imageSrc || 'no-pl-img.jpg'}
+									alt='playlist art'
+								/>
 							</Link>
 
 							<div className='plcard__info'>
@@ -124,12 +130,13 @@ const Playlists = () => {
 
 								<div className='plcard__extra'>
 									<span className='plcard__song-count'>
-										{playlist.songCount} Songs
+										{playlist.tracks ? playlist.tracks.length : 0}
+										{' Songs'}
 									</span>
 
 									<button
 										className='plcard__btn'
-										onClick={() => edit(index)}
+										onClick={() => showPopup(playlist._id)}
 									>
 										<MdModeEdit />
 									</button>
