@@ -65,10 +65,10 @@ export default class PlaylistDAO {
 		}
 	}
 
-	static async addPlaylist(user_id, playlist_name) {
+	static async addPlaylist(user_id, title) {
 		const newPlaylist = {
 			user_id,
-			playlist_name
+			title
 		};
 
 		try {
@@ -79,7 +79,7 @@ export default class PlaylistDAO {
 		}
 	}
 
-	static async updatePlaylist(playlist_id, user_id, playlist_name, tracks) {
+	static async updatePlaylist(playlist_id, user_id, title, tracks) {
 		let setObj = {};
 
 		if (tracks) {
@@ -93,7 +93,7 @@ export default class PlaylistDAO {
 			}
 		}
 
-		if (playlist_name) setObj.playlist_name = playlist_name;
+		if (title) setObj.title = title;
 
 		try {
 			return await playlist.updateOne(
