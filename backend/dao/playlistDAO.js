@@ -1,5 +1,6 @@
 import mongodb from 'mongodb';
 const ObjectId = mongodb.ObjectID;
+import SongsDAO from './songsDAO.js';
 
 let playlist;
 
@@ -81,7 +82,17 @@ export default class PlaylistDAO {
 	static async updatePlaylist(playlist_id, user_id, playlist_name, tracks) {
 		let setObj = {};
 
-		if (tracks) setObj.tracks = tracks;
+		if (tracks) {
+			setObj.tracks = tracks;
+
+			if (tracks.length > 0) {
+				const { songsList } = await SongsDAO.getSongsById([tracks[0]]);
+				setObj.imageSrc = songsList[0].imageSrc;
+			} else {
+				setObj.imageSrc = null;
+			}
+		}
+
 		if (playlist_name) setObj.playlist_name = playlist_name;
 
 		try {
