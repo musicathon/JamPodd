@@ -123,7 +123,7 @@ const Playlists = () => {
 								className='plcard__img-cntr'
 							>
 								<img
-									src={playlist.imageSrc || 'no-pl-img.jpg'}
+									src={playlist.imageSrc || 'assets/no-pl-img.png'}
 									alt='playlist art'
 								/>
 							</Link>

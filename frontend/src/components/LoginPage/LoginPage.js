@@ -28,7 +28,7 @@ function LoginPage({ setGToken }) {
 				<h1>JamPodd</h1>
 				<h1>Sign In</h1>
 				<div className='login__img-cntr'>
-					<img src='/logo-dark.png' alt='jampodd logo' />
+					<img src='/assets/logo512.png' alt='jampodd logo' />
 				</div>
 				<button onClick={signIn} className='gbtn --login'>
 					<div className='gbtn__icon-cntr'>

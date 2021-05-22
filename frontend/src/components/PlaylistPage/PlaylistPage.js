@@ -57,7 +57,7 @@ const PlaylistPage = ({ setCurrentTrackIndex, setCurrentTrackList, setDoShuffle 
 				<h4>Playlist</h4>
 
 				<div className='plinfo__img-cntr'>
-					<img src={playlist.imageSrc || '/no-pl-img.jpg'} alt='' />
+					<img src={playlist.imageSrc || '/assets/no-pl-img.png'} alt='' />
 				</div>
 
 				<h1 className='plinfo__title'>{playlist.title}</h1>

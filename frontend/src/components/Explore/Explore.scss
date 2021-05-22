@@ -21,9 +21,10 @@
 	}
 
 	&__cntr {
+		max-width: 35em;
 		margin-top: 0.5em;
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
 		gap: 0.75em 1.5em;
 	}
 
@@ -32,7 +33,7 @@
 		align-items: center;
 		padding: 0.75em;
 		border-radius: 8px;
-		gap: 1em;
+		gap: 1.2em;
 
 		transition: background 50ms ease-out, transform 50ms ease-in-out;
 		&:hover {
@@ -53,7 +54,8 @@
 	}
 
 	&__title {
-		font-size: 1.25em;
+		font-size: 1.3em;
+		font-weight: 500;
 		text-align: left;
 	}
 }

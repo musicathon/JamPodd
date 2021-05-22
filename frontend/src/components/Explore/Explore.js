@@ -156,7 +156,7 @@ const Explore = ({ setCurrentTrackIndex, setCurrentTrackList }) => {
 							>
 								<div className='selectpl__img-cntr'>
 									<img
-										src={playlist.imageSrc || '/no-pl-img.jpg'}
+										src={playlist.imageSrc || '/assets/no-pl-img.png'}
 										alt='playlist art'
 									/>
 								</div>
