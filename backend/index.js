@@ -6,7 +6,7 @@ import playlistDAO from './dao/playlistDAO.js';
 dotenv.config();
 const MongoClient = mongodb.MongoClient;
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 5000;
 
 MongoClient.connect(process.env.MUSIC_DB_URI, {
 	poolSize: 100,

@@ -2,25 +2,25 @@ import http from '../http-common';
 
 class PlayListsDS {
 	getAll() {
-		return http.get('playlists/');
+		return http.get('/api/ver1/playlists/');
 	}
 
 	getById(id) {
-		return http.get(`playlists/id/${id}`);
+		return http.get(`/api/ver1/playlists/id/${id}`);
 	}
 
 	create(title) {
 		const data = { title };
-		return http.post('playlists/', data);
+		return http.post('/api/ver1/playlists/', data);
 	}
 
 	edit({ id, title, tracks }) {
 		const data = { title, tracks };
-		return http.put(`playlists/id/${id}`, data);
+		return http.put(`/api/ver1/playlists/id/${id}`, data);
 	}
 
 	delete(id) {
-		return http.delete(`playlists/id/${id}`);
+		return http.delete(`/api/ver1/playlists/id/${id}`);
 	}
 }
 
