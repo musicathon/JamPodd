@@ -1,19 +1,18 @@
-// const { OAuth2Client } = require('google-auth-library');
-// const client = new OAuth2Client(process.allowedNodeEnvironmentFlags.GOOGLE_CLIENT_ID);
+import { config } from 'dotenv';
+config();
 
-// const googleAuth = async(token) => {
-//     const ticket = await client.verifyIdToken({
-//         idToken: token,
-//         audience: process.env.GOOGLE_CLIENT_ID,
-//     });
-//     const payload = ticket.getPayload();
+import { OAuth2Client } from 'google-auth-library';
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-//     console.log(`User ${payload.name} verified`); 
-    
-//     const { sub, email, name, picture } = payload;
-//     const userId = sub;
-//     return{userId, email, fullName: name, photoUrl: picture}
-// };
-
-// module.exports = googleAuth;
-
+export default async (idToken) => {
+	return await client
+		.verifyIdToken({
+			idToken,
+			audience: process.env.GOOGLE_OAUTH_ID
+		})
+		.then((res) => {
+			const { email, hd } = res.getPayload();
+			if (hd === 'goa.bits-pilani.ac.in') return { verified: true, email };
+		})
+		.catch((e) => ({ verified: false }));
+};

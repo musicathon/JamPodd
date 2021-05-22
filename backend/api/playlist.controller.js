@@ -1,20 +1,8 @@
 import PlaylistDAO from '../dao/playlistDAO.js';
 
 export default class PlaylistController {
-	static isUserAuth(user_id) {
-		// add google JWT verification
-
-		if (user_id) return true;
-		return false;
-	}
-
 	static async apiGetPlaylists(req, res, next) {
-		const user_id = req.header('user_id');
-
-		if (!PlaylistController.isUserAuth(user_id)) {
-			res.status(401).json({ error: 'not authorized' });
-			return;
-		}
+		const user_id = res.locals.user_id;
 
 		const { playlistList, totalNumPlaylists } = await PlaylistDAO.getPlaylists(
 			user_id
@@ -28,12 +16,7 @@ export default class PlaylistController {
 	}
 
 	static async apiGetPlaylistById(req, res) {
-		const user_id = req.header('user_id');
-
-		if (!PlaylistController.isUserAuth(user_id)) {
-			res.status(401).json({ error: 'not authorized' });
-			return;
-		}
+		const user_id = res.locals.user_id;
 
 		const playlist_id = req.params.id;
 
@@ -44,12 +27,7 @@ export default class PlaylistController {
 	}
 
 	static async apiAddPlaylist(req, res, next) {
-		const user_id = req.header('user_id');
-
-		if (!PlaylistController.isUserAuth(user_id)) {
-			res.status(401).json({ error: 'not authorized' });
-			return;
-		}
+		const user_id = res.locals.user_id;
 
 		const title = req.body.title;
 		if (!title) {
@@ -72,12 +50,7 @@ export default class PlaylistController {
 	}
 
 	static async apiEditPlaylist(req, res, next) {
-		const user_id = req.header('user_id');
-
-		if (!PlaylistController.isUserAuth(user_id)) {
-			res.status(401).json({ error: 'not authorized' });
-			return;
-		}
+		const user_id = res.locals.user_id;
 
 		const playlist_id = req.params.id;
 		const title = req.body.title;
@@ -103,12 +76,7 @@ export default class PlaylistController {
 	}
 
 	static async apiDeletePlaylist(req, res, next) {
-		const user_id = req.header('user_id');
-
-		if (!PlaylistController.isUserAuth(user_id)) {
-			res.status(401).json({ error: 'not authorized' });
-			return;
-		}
+		const user_id = res.locals.user_id;
 
 		const playlist_id = req.params.id;
 		try {
