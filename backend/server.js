@@ -1,3 +1,4 @@
+import path from 'path';
 import express from 'express';
 import cors from 'cors';
 import songs from './api/songs.route.js';
@@ -5,6 +6,7 @@ import playlists from './api/playlists.route.js';
 import verifyToken from './auth.js';
 
 const app = express();
+const __dirname = path.resolve(path.dirname(''));
 
 // add origin and allowed headers to cors if not working
 /* 
@@ -26,6 +28,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use(express.static(path.resolve(__dirname, 'build')));
 app.use(async (req, res, next) => {
 	const authHeader = req.header('authorization');
 	let authres;
@@ -41,12 +44,14 @@ app.use(async (req, res, next) => {
 		res.locals.user_id = authres.email;
 		next();
 	} else {
-		res.status(401).json({ error: 'not authorized' });
+		res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
 	}
 });
 app.use('/api/ver1/songs', songs);
 app.use('/api/ver1/playlists', playlists);
-app.use('*', (req, res) => res.status(404).json({ error: 'not found' }));
+app.use('*', (req, res) => {
+	res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+});
 
 /* ===========
 	Summary:
