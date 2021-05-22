@@ -7,7 +7,6 @@ const clientId = process.env.REACT_APP_GOOGLE_OAUTH_ID;
 
 function LoginPage({ setGToken }) {
 	const onSuccess = (res) => {
-		console.log(res);
 		setGToken(res);
 		refreshTokenSetup(res, setGToken);
 	};

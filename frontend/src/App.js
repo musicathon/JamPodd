@@ -17,11 +17,12 @@ function App() {
 	const [doShuffle, setDoShuffle] = useState(false); // shuffle state
 
 	useEffect(() => {
-		if (gToken) http.defaults.headers.common['user_id'] = gToken.profileObj.email;
+		if (gToken)
+			http.defaults.headers.common['authorization'] = `Bearer ${gToken.tokenId}`;
 
 		// reset auth header, currentTrackIndex and currentTrackList on when footer unmounts
 		return () => {
-			delete http.defaults.headers.common['user_id'];
+			delete http.defaults.headers.common['authorization'];
 			setCurrentTrackIndex(undefined);
 			setCurrentTrackList([]);
 			setDoShuffle(false);

@@ -6,6 +6,23 @@ import verifyToken from './auth.js';
 
 const app = express();
 
+// add origin and allowed headers to cors if not working
+/* 
+{
+		origin: '*',
+		methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+		allowedHeaders: [
+			'Authorization',
+			'Origin',
+			'X-Requested-With',
+			'Content-Type',
+			'Accept',
+			'Access-Control-Request-Method',
+			'Access-Control-Request-Headers',
+			'Cache-Control'
+		]
+	}
+*/
 app.use(cors());
 app.use(express.json());
 
