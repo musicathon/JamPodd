@@ -40,7 +40,7 @@ const PlaylistPage = ({ setCurrentTrackIndex, setCurrentTrackList, setDoShuffle 
 
 	const onShuffle = () => {
 		setDoShuffle(true);
-		onPlay(Math.floor(Math.random() * playlist.tracks.length));
+		onPlay(Math.floor(Math.random() * tracks.length));
 	};
 
 	const onDelete = async (id) => {

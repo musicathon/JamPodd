@@ -7,6 +7,7 @@ const clientId = process.env.REACT_APP_GOOGLE_OAUTH_ID;
 
 function LoginPage({ setGToken }) {
 	const onSuccess = (res) => {
+		console.log(res);
 		setGToken(res);
 		refreshTokenSetup(res, setGToken);
 	};
@@ -18,7 +19,7 @@ function LoginPage({ setGToken }) {
 		onFailure,
 		clientId,
 		hostedDomain: 'goa.bits-pilani.ac.in',
-		prompt: "select_account",
+		prompt: 'select_account',
 		isSignedIn: true
 	});
 
