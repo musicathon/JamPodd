@@ -1,5 +1,3 @@
-// TODO: Add logout button
-
 import './Header.css';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../LogoutButton/LogoutButton';
@@ -10,6 +8,9 @@ const Header = ({ setGToken, DPSrc }) => {
 	return (
 		<header>
 			<div className='logo'>
+				<div className='logo__img-cntr'>
+					<img src='/assets/logo192.png' alt='icon' className='logo__img' />
+				</div>
 				<span className='logo__title'>JamPodd</span>
 			</div>
 
