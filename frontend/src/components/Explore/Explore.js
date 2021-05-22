@@ -1,7 +1,7 @@
 import './Explore.css';
 import songsDS from '../../utils/songsDS';
 import playlistsDS from '../../utils/PlaylistsDS';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { IoMdAdd } from 'react-icons/io';
 import { IoPlay, IoClose } from 'react-icons/io5';
@@ -15,6 +15,13 @@ const Explore = ({ setCurrentTrackIndex, setCurrentTrackList }) => {
 
 	const [playlists, setPlaylists] = useState();
 	const [showPlSelector, setShowPlSelector] = useState(false);
+
+	useEffect(() => {
+		songsDS
+			.getByKeyword('')
+			.then((res) => setQueriedTracks(res.data.songs))
+			.catch((e) => console.error(e));
+	}, []);
 
 	const onAddPlClick = async () => {
 		setShowPlSelector(true);
@@ -183,7 +190,6 @@ const Explore = ({ setCurrentTrackIndex, setCurrentTrackList }) => {
 						type='text'
 						onChange={(e) => setQuery(e.target.value)}
 						value={query}
-						placeholder='leave empty for random'
 					/>
 					<button type='submit'>
 						<AiOutlineSearch />
