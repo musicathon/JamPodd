@@ -56,11 +56,23 @@ const Footer = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isPlaying]);
 
+	// refresh audioref and play it
+	const refreshAudio = () => {
+		audioRef.current.volume = volume;
+		audioRef.current
+			.play()
+			.then(() => {
+				setIsPlaying(true);
+				startUpdatingSeek();
+			})
+			.catch((e) => null);
+	};
+
 	// change tracks
 	const toPrevTrack = () => {
 		if (trackProgress > 5 || doRepeat) {
 			audioRef.current.currentTime = 0;
-			audioRef.current.play();
+			refreshAudio();
 		} else if (doShuffle) setCurrentTrackIndex(getRandomTrackIndex());
 		else if (currentTrackIndex === 0)
 			setCurrentTrackIndex(currentTrackList.length - 1);
@@ -70,7 +82,7 @@ const Footer = ({
 	const toNextTrack = () => {
 		if (doRepeat) {
 			audioRef.current.currentTime = 0;
-			audioRef.current.play();
+			refreshAudio();
 		} else if (doShuffle) setCurrentTrackIndex(getRandomTrackIndex());
 		else if (currentTrackIndex === currentTrackList.length - 1)
 			setCurrentTrackIndex(0);
@@ -93,13 +105,10 @@ const Footer = ({
 	// reset audio source when currentTrackIndex or currentTrackList change
 	useEffect(() => {
 		audioRef.current = new Audio(audioSrc);
+		refreshAudio();
 
-		audioRef.current.play();
-		setIsPlaying(true);
-		startUpdatingSeek();
-
-		// stop previous playback
-		return () => audioRef.current.pause();
+		// reload audioRef
+		return () => audioRef.current.load();
 
 		// stfu linter:
 		// eslint-disable-next-line react-hooks/exhaustive-deps

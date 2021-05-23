@@ -1,9 +1,7 @@
 # JamPodd
 
-Find the link to our web application here:
-http://jampodd.herokuapp.com/
-
-If you're using a browser/extension that automatically upgrades http to https, please disable it for this app.
+Find the link to JamPodd here:
+https://jampodd.herokuapp.com/
 
 # Getting Started with Create React App
 
