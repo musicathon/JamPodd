@@ -3,7 +3,7 @@ import { useGoogleLogin } from 'react-google-login';
 import { AiOutlineGoogle } from 'react-icons/ai';
 import { refreshTokenSetup } from '../../utils/refreshToken';
 
-const clientId = process.env.REACT_APP_GOOGLE_OAUTH_ID;
+const clientId = process.env.GOOGLE_OAUTH_ID || process.env.REACT_APP_GOOGLE_OAUTH_ID;
 
 function LoginPage({ setGToken }) {
 	const onSuccess = (res) => {

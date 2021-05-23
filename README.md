@@ -1,7 +1,9 @@
 # JamPodd
 
 Find the link to our web application here:
-https://jampodd.netlify.app/
+http://jampodd.herokuapp.com/
+
+If you're using a browser/extension that automatically upgrades http to https, please disable it for this app.
 
 # Getting Started with Create React App
 

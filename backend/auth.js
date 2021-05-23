@@ -1,14 +1,16 @@
 import { config } from 'dotenv';
 config();
 
+const gOauthId = process.env.GOOGLE_OAUTH_ID;
+
 import { OAuth2Client } from 'google-auth-library';
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+const client = new OAuth2Client(gOauthId);
 
 export default async (idToken) => {
 	return await client
 		.verifyIdToken({
 			idToken,
-			audience: process.env.GOOGLE_OAUTH_ID
+			audience: gOauthId
 		})
 		.then((res) => {
 			const { email, hd } = res.getPayload();

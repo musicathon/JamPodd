@@ -1,8 +1,7 @@
-import './LogoutButton.css';
 import React from 'react';
 import { useGoogleLogout } from 'react-google-login';
 
-const clientId = process.env.REACT_APP_GOOGLE_OAUTH_ID;
+const clientId = process.env.GOOGLE_OAUTH_ID || process.env.REACT_APP_GOOGLE_OAUTH_ID;
 
 function LogoutButton({ setGToken, DPSrc }) {
 	const onLogoutSuccess = (res) => {
