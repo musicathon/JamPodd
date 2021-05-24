@@ -26,7 +26,7 @@ const Footer = ({
 
 	const { title, artist, audioSrc, imageSrc } = currentTrackList[currentTrackIndex]; // get current track info
 
-	const audioRef = useRef(new Audio(audioSrc)); // current track Audio object
+	const audioRef = useRef(new Audio()); // current track Audio object
 	const intervalRef = useRef(); // stores IDs of setInterval
 
 	// autoplayback and seek-bar updater
@@ -58,6 +58,7 @@ const Footer = ({
 
 	// refresh audioref and play it
 	const refreshAudio = () => {
+		audioRef.current.load();
 		audioRef.current.volume = volume;
 		audioRef.current
 			.play()
@@ -70,20 +71,16 @@ const Footer = ({
 
 	// change tracks
 	const toPrevTrack = () => {
-		if (trackProgress > 5 || doRepeat) {
-			audioRef.current.currentTime = 0;
-			refreshAudio();
-		} else if (doShuffle) setCurrentTrackIndex(getRandomTrackIndex());
+		if (trackProgress > 5 || doRepeat) refreshAudio();
+		else if (doShuffle) setCurrentTrackIndex(getRandomTrackIndex());
 		else if (currentTrackIndex === 0)
 			setCurrentTrackIndex(currentTrackList.length - 1);
 		else setCurrentTrackIndex(currentTrackIndex - 1);
 	};
 
 	const toNextTrack = () => {
-		if (doRepeat) {
-			audioRef.current.currentTime = 0;
-			refreshAudio();
-		} else if (doShuffle) setCurrentTrackIndex(getRandomTrackIndex());
+		if (doRepeat) refreshAudio();
+		else if (doShuffle) setCurrentTrackIndex(getRandomTrackIndex());
 		else if (currentTrackIndex === currentTrackList.length - 1)
 			setCurrentTrackIndex(0);
 		else setCurrentTrackIndex(currentTrackIndex + 1);
@@ -104,11 +101,9 @@ const Footer = ({
 
 	// reset audio source when currentTrackIndex or currentTrackList change
 	useEffect(() => {
-		audioRef.current = new Audio(audioSrc);
+		// fixes chrome cache bug
+		audioRef.current.src = `${audioSrc}?x=${Math.random()}`;
 		refreshAudio();
-
-		// reload audioRef
-		return () => audioRef.current.load();
 
 		// stfu linter:
 		// eslint-disable-next-line react-hooks/exhaustive-deps
