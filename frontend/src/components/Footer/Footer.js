@@ -12,6 +12,8 @@ import {
 	IoVolumeHigh
 } from 'react-icons/io5';
 
+const audio = new Audio(); // audio object for playing songs
+
 const Footer = ({
 	currentTrackIndex,
 	setCurrentTrackIndex,
@@ -26,8 +28,20 @@ const Footer = ({
 
 	const { title, artist, audioSrc, imageSrc } = currentTrackList[currentTrackIndex]; // get current track info
 
-	const audioRef = useRef(new Audio()); // current track Audio object
 	const intervalRef = useRef(); // stores IDs of setInterval
+
+	// run on mount/unmount
+	useEffect(() => {
+		audio.volume = volume;
+
+		return () => {
+			audio.src = undefined;
+			audio.load();
+		};
+
+		// stfu linter:
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	// autoplayback and seek-bar updater
 	const stopUpdatingSeek = () => clearInterval(intervalRef.current);
@@ -38,17 +52,17 @@ const Footer = ({
 
 		// checks every second if the song has ended, and updates the seek bar.
 		intervalRef.current = setInterval(() => {
-			if (audioRef.current.ended) toNextTrack();
-			else setTrackProgress(audioRef.current.currentTime);
+			if (audio.ended) toNextTrack();
+			else setTrackProgress(audio.currentTime);
 		}, [500]);
 	};
 
 	useEffect(() => {
 		if (isPlaying) {
-			audioRef.current.play();
+			audio.play();
 			startUpdatingSeek();
 		} else {
-			audioRef.current.pause();
+			audio.pause();
 			stopUpdatingSeek();
 		}
 
@@ -58,9 +72,8 @@ const Footer = ({
 
 	// refresh audioref and play it
 	const refreshAudio = () => {
-		audioRef.current.load();
-		audioRef.current.volume = volume;
-		audioRef.current
+		audio.load();
+		audio
 			.play()
 			.then(() => {
 				setIsPlaying(true);
@@ -102,7 +115,7 @@ const Footer = ({
 	// reset audio source when currentTrackIndex or currentTrackList change
 	useEffect(() => {
 		// fixes chrome cache bug
-		audioRef.current.src = `${audioSrc}?x=${Math.random()}`;
+		audio.src = `${audioSrc}?x=${Math.random()}`;
 		refreshAudio();
 
 		// stfu linter:
@@ -113,7 +126,7 @@ const Footer = ({
 	const onSeek = (value) => {
 		stopUpdatingSeek();
 
-		audioRef.current.currentTime = value;
+		audio.currentTime = value;
 		setTrackProgress(value);
 	};
 
@@ -125,7 +138,9 @@ const Footer = ({
 	};
 
 	const toggleMute = () => (volume === 0 ? setVolume(0.75) : setVolume(0));
-	useEffect(() => (audioRef.current.volume = volume), [volume]);
+	// stfu linter:
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	useEffect(() => (audio.volume = volume), [volume]);
 
 	const parseTime = (timeInSec) => {
 		if (!timeInSec) return NaN;
@@ -139,7 +154,7 @@ const Footer = ({
 	};
 
 	// get % of track progress
-	const { duration } = audioRef.current;
+	const { duration } = audio;
 	const trackPerc = duration ? (trackProgress / duration) * 100 : 0,
 		volumePerc = volume * 100;
 
