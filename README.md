@@ -1,6 +1,6 @@
 # JamPodd
-[Link to the app](https://jampodd.herokuapp.com) \
-[Link to the demo video](https://youtu.be/4avEy_a7yVY)
+* Find the App here: [JamPodd](https://jampodd.herokuapp.com) 
+* Find the Demonstration video here: [Demo video](https://youtu.be/4avEy_a7yVY)
 
 A Web Music player with the ability to search for songs, create/edit playlists, add songs to playlists, and of course, play songs and playlists. \
 Sign In via BITS Mail.
