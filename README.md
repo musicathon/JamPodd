@@ -19,17 +19,17 @@ Sign In via BITS Mail.
 
 
 ### Make your own playlists 
-- Create playlists with your favourite tracks.
+- Create playlists with your favourite tracks. Add songs from the **Explore** tab
+* ![image](https://i.imgur.com/Chdn9xlm.png)       ![image](https://i.imgur.com/nB2FAVml.png)
 - Your playlists are tied to your BITS Email.
 
-![image](https://user-images.githubusercontent.com/63366288/119705633-9fb83500-be76-11eb-8902-f3af1aaf3c37.png)
 
-![image](https://user-images.githubusercontent.com/63366288/119706034-15240580-be77-11eb-97ab-bb9939d6d635.png)
+* ![image](https://i.imgur.com/BIfbM4Wl.png)
 
 - Rename them to anything you like.
 - Delete playlists anytime you want, or cherish them forever!
 
-![image](https://user-images.githubusercontent.com/63366288/119706088-28cf6c00-be77-11eb-8412-75a310408f5f.png)
+* ![image]([Imgur](https://i.imgur.com/MKJX3O6l.png))
 
 ### Play from the songs list itself
 - Don't wish to create a playlist? Play from the list of songs you've searched!
