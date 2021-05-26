@@ -6,7 +6,7 @@ A Web Music player with the ability to search for songs, create/edit playlists, 
 Sign In via BITS Mail for an immersive expreience.
 
 ## Made for Devsoc with 💙 by:
-- [Ashmit](https://github.com/ashmitkx):/
+- [Ashmit](https://github.com/ashmitkx):
 - UI design and functionality of the explore, playlists and playlist page components.
 - The music player and controls, iage routing, integrating the frontend with the backend./
 
@@ -16,7 +16,7 @@ Things learned:
 
 First time I've worked on a fully functioning frontend.
 
-- [Darahaas](https://github.com/darahaas15):/
+- [Darahaas](https://github.com/darahaas15):
 - Set up the express server.
 - Linked it up to a MongoDB cluster.
 - Made data access objects and controller files for fetching songs, playlists, etc. by name(using search indexes + MongoDB filters).
