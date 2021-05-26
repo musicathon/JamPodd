@@ -29,7 +29,7 @@ Sign In via BITS Mail.
 - Rename them to anything you like.
 - Delete playlists anytime you want, or cherish them forever!
 
-* ![image]([Imgur](https://i.imgur.com/MKJX3O6l.png))
+* ![image](https://i.imgur.com/MKJX3O6l.png)
 
 ### Play from the songs list itself
 - Don't wish to create a playlist? Play from the list of songs you've searched!
