@@ -17,7 +17,8 @@ Sign In via BITS Mail.
 ### Search your favourite songs
 - Search from a vairety of different songs that fit your mood
 - You may search using your favorite artist, genre or song name
-- ![Search by Name](https://i.imgur.com/BUOzwAMm.png)
+- ![Search by Name](https://i.imgur.com/BUOzwAMl.png)
+- 
 
 ### Make your own playlists 
 - Create playlists with your favourite tracks
