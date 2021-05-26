@@ -5,26 +5,7 @@
 A Web Music player with the ability to search for songs, create/edit playlists, add songs to playlists, and of course, play songs and playlists. \
 Sign In via BITS Mail for an immersive expreience.
 
-## Made for Devsoc with 💙 by:
-- [Ashmit](https://github.com/ashmitkx):
-- UI design and functionality of the explore, playlists and playlist page components.
-- The music player and controls, iage routing, integrating the frontend with the backend./
 
-Things learned:
-
-- React components, states, routing. Fetching and posting data to a backend.
-
-First time I've worked on a fully functioning frontend.
-
-- [Darahaas](https://github.com/darahaas15):
-- Set up the express server.
-- Linked it up to a MongoDB cluster.
-- Made data access objects and controller files for fetching songs, playlists, etc. by name(using search indexes + MongoDB filters).
-- Backend for creating/editing/deleting playlist data.
-
-This is my first time working on a node backend.
-
-- [Piyush](https://github.com/git-pi-e)
 
 ## Features:
 ### Search your favourite songs
@@ -51,3 +32,37 @@ This is my first time working on a node backend.
 - Don't wish to create a playlist? Play from the list of songs you've searched!
 
 * ![image](https://i.imgur.com/nB2FAVml.png)
+
+
+
+
+
+
+## Made for Devsoc with 💙 by:
+[Ashmit](https://github.com/ashmitkx):
+- UI design and functionality of the explore, playlists and playlist page components.
+- The music player and controls, page routing, integrating the frontend with the backend.
+
+ Things learned:
+- React components, states, routing. Fetching and posting data to a backend.
+
+First time I've worked on a fully functioning frontend.
+
+[Darahaas](https://github.com/darahaas15):
+- Set up the express server.
+- Linked it up to a MongoDB cluster.
+- Made data access objects and controller files for fetching songs, playlists, etc. by name(using search indexes + MongoDB filters).
+- Backend for creating/editing/deleting playlist data.
+
+This is my first time working on a node backend.
+
+[Piyush](https://github.com/git-pi-e):
+- Set up google sign-in components using react-google-login package and setting up google auth.
+- Created bucket in Google Cloud to store song data.
+
+Things I learnt:
+- React components, states, Google Cloud Console storage, authorisation using GCP
+
+This is my first time working with a fully functioning application built in MERN stack
+
+
