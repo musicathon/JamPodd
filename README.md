@@ -31,7 +31,7 @@ Sign In via BITS Mail for an immersive expreience.
 
 ![image](https://i.imgur.com/nB2FAVml.png)
 
-## Made for Devsoc with 💙 by:
+## Made for DevSoc with 💙 by:
 ### [Ashmit](https://github.com/ashmitkx)
 - Made the UI design and functionality of the explore, playlists and playlist page components.
 - Made the music player and controls, setup page routing, integrated the frontend with the backend.
